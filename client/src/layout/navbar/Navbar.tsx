@@ -1,6 +1,7 @@
-/* import { useState } from "react"; */
+import { useState, useEffect } from "react";
 import NavItem from "../../components/nav-item/NavItem";
 import "./Navbar.scss";
+import { Twirl as Hamburger } from "hamburger-react";
 
 const NavItems = [
   {
@@ -21,22 +22,50 @@ const AuthItems = [
 ];
 
 function Navbar() {
-  /*   const [windowSize, setWindowSize] = useState({
+  const [isOpen, setOpen] = useState(false);
+
+  const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
-}); */
+  });
+
+  useEffect(() => {
+    window.onresize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+  }, []);
 
   return (
-    <div className="navbar">
-      <h1>We Train logo</h1>
+    <div
+      className={
+        isOpen || windowSize.width > 768 ? "navbar opened" : "navbar closed"
+      }
+    >
+      <div className="logo-hamburger">
+        <h1>We Train logo</h1>
+        <span className="hamburger">
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+        </span>
+      </div>
       <div className="nav-links">
         {NavItems.map((item) => {
-          return <NavItem path={item.path}>{item.text}</NavItem>;
+          return (
+            <NavItem key={item.text} path={item.path}>
+              {item.text}
+            </NavItem>
+          );
         })}
       </div>
       <div className="auth">
         {AuthItems.map((item) => {
-          return <NavItem path={item.path}>{item.text}</NavItem>;
+          return (
+            <NavItem key={item.text} path={item.path}>
+              {item.text}
+            </NavItem>
+          );
         })}
       </div>
     </div>
