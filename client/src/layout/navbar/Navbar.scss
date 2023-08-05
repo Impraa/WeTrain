@@ -2,30 +2,24 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 1.5em;
+  padding: 1em;
   .logo-hamburger {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     h1 {
       padding: 0.25em 0.25em 0.25em 0;
     }
   }
-
-  .nav-links {
-    padding: 0.5em 0 0.5em 0;
-  }
-
   .auth {
-    padding: 0.5em 0 0.5em 0;
     display: flex;
     flex-direction: column;
   }
 }
 
 .closed {
-  transition: 0.2s ease-in-out;
-  height: 5vh;
+  transition: max-height 0.25s ease-in-out, visibility 0.25s ease-in-out;
+  max-height: 10vh;
   .nav-links {
     visibility: hidden;
   }
@@ -35,8 +29,8 @@
 }
 
 .opened {
-  height: 18.5vh;
-  transition: 0.2s ease-in-out;
+  transition: max-height 0.25s ease-in-out, visibility 0.25s ease-in-out;
+  max-height: 1000px;
   .nav-links {
     visibility: visible;
   }
@@ -49,8 +43,8 @@
   .navbar {
     flex-direction: row;
     align-items: center;
-    padding: 1em 1em 0 1em;
-    height: 7.5vh;
+    padding: 1.75em;
+    height: 10vh;
 
     .logo-hamburger {
       .hamburger {
@@ -60,7 +54,9 @@
     }
 
     .auth {
+      flex: 1;
       padding: 0;
+      justify-content: flex-end;
       flex-direction: row;
     }
   }

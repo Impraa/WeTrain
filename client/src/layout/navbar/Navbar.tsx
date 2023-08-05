@@ -39,9 +39,9 @@ function Navbar() {
   }, []);
 
   return (
-    <div
+    <nav
       className={
-        isOpen || windowSize.width > 768 ? "navbar opened" : "navbar closed"
+        isOpen || windowSize.width >= 768 ? "navbar opened" : "navbar closed"
       }
     >
       <div className="logo-hamburger">
@@ -68,7 +68,7 @@ function Navbar() {
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }
 

@@ -1,11 +1,9 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./NavItem.scss";
+import { NavItemProps } from "../../utils/PropsInterfaces";
 
-const NavItem: React.FC<{ path: string; children: ReactNode }> = ({
-  path,
-  children,
-}) => {
+const NavItem: React.FC<NavItemProps> = ({ path, children }) => {
   return (
     <Link className="nav-item" to={path}>
       {children}
