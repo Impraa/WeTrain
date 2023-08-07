@@ -1,5 +1,6 @@
 @import "../../utils/variables";
 .navbar {
+  background-color: $navAndFooterColor;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,7 +19,6 @@
   .nav-links,
   .auth {
     transition: all 0.25s ease-in-out;
-    background-color: $mainColor;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -28,6 +28,7 @@
 .closed {
   .nav-links,
   .auth {
+    height: 0;
     visibility: hidden;
     opacity: 0;
   }

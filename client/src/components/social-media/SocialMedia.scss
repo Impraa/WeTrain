@@ -1,0 +1,22 @@
+@import "../../utils/variables";
+.socialMedia {
+  padding: 1em 0;
+  border-bottom: 0.1em solid $textColor;
+  h3 {
+    font-size: 1.3em;
+  }
+
+  svg {
+    height: 2em;
+    width: 2em;
+    margin: 0.5em 0.25em 0 0.5em;
+    transition: 0.25s all ease-in-out;
+  }
+
+  svg:first-of-type:hover {
+    color: #4267b2;
+  }
+  svg:nth-of-type(2):hover {
+    color: #eb309a;
+  }
+}

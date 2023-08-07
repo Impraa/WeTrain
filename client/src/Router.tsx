@@ -3,6 +3,7 @@ import Navbar from "./layout/navbar/Navbar";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Footer from "./layout/footer/Footer";
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer />
     </>
   );
 }

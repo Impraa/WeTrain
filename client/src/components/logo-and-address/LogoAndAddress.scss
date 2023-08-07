@@ -1,0 +1,18 @@
+@import "../../utils/variables";
+.logo-and-address {
+  .address {
+    padding: 1em 0;
+    display: flex;
+    border-bottom: 0.1em solid $textColor;
+
+    svg {
+      width: 2em;
+      height: 2em;
+    }
+
+    p {
+      font-size: 1.25em;
+      padding: 0 0 0 0.5em;
+    }
+  }
+}

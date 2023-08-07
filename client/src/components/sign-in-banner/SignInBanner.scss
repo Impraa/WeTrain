@@ -8,7 +8,7 @@
     position: relative;
     width: 100%;
     object-fit: cover;
-    height: 99%;
+    height: 100%;
     filter: brightness(0.35);
   }
   .text {
@@ -20,5 +20,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    h2 {
+      font-size: 2em;
+    }
+    h3 {
+      font-size: 1.3em;
+      padding: 0.25em 0 0.5em 0;
+      text-align: center;
+    }
+
+    .sign-in-button {
+      padding: 0.75em 1em;
+      margin: 1em 0;
+      text-transform: uppercase;
+      background-color: $secondaryColor;
+      border: none;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      border-radius: 1em;
+      transition: 0.5s all ease-in-out;
+      &:hover {
+        box-shadow: inset 0em 5em 0em 0em $textColor;
+        color: $secondaryColor;
+      }
+    }
   }
 }
