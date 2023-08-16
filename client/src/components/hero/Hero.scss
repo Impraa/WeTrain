@@ -34,3 +34,25 @@
     border-bottom: 0.1em solid $textColor;
   }
 }
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 73vh;
+    flex-direction: row;
+    .text {
+      order: 1;
+      h2 {
+        text-align: center;
+      }
+    }
+    .image-div {
+      order: 2;
+      height: 70vh;
+      width: 200em;
+      border-radius: 10em 0em 0em 10em;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: none;
+    }
+  }
+}

@@ -16,3 +16,14 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .logo-and-address {
+    padding: 1.25em;
+    border-bottom: none;
+    border-right: 0.1em solid $textColor;
+    .address {
+      border-bottom: none;
+    }
+  }
+}

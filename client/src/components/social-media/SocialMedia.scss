@@ -20,3 +20,10 @@
     color: #eb309a;
   }
 }
+
+@media (min-width: 768px) {
+  .socialMedia {
+    border-bottom: none;
+    padding: 1.25em;
+  }
+}

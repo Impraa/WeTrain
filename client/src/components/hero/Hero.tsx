@@ -4,7 +4,7 @@ function Hero() {
   return (
     <section className="hero">
       <div className="text">
-        <h2>Welcome to we train!</h2>
+        <h2>Welcome to WeTrain!</h2>
         <p>
           Ready to own your strength? Join WeTrain today and unlock a fitter,
           more confident you. Our high-energy workouts, expert coaches, and

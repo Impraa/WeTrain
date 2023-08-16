@@ -7,3 +7,11 @@ footer {
   flex-direction: column;
   padding: 0.5em 0.25em;
 }
+
+@media (min-width: 768px) {
+  footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}
