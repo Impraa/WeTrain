@@ -23,6 +23,12 @@
     display: flex;
     flex-direction: column;
   }
+
+  .auth {
+    .nav-item {
+      margin: 0 1em;
+    }
+  }
 }
 
 .closed {

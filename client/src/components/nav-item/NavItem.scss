@@ -1,6 +1,16 @@
+@import "../../utils/variables";
+
 .nav-item {
   padding: 0.25em 0 0.25em 0;
   align-self: center;
+  color: $textColor;
+  text-decoration: none;
+  transition: 0.5s all ease-in-out;
+  font-weight: 500;
+  &:hover {
+    box-shadow: inset 5em 0em 0em 0em $textColor;
+    color: $secondaryColor;
+  }
 }
 
 @media (min-width: 768px) {

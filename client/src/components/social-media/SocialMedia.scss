@@ -15,9 +15,11 @@
 
   svg:first-of-type:hover {
     color: #4267b2;
+    cursor: pointer;
   }
   svg:nth-of-type(2):hover {
     color: #eb309a;
+    cursor: pointer;
   }
 }
 
