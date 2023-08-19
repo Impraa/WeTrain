@@ -3,6 +3,7 @@ import IconEye from "../../assets/IconEye";
 import "./LoginForm.scss";
 import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import CustomButton from "../custom-button/CustomButton";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -35,6 +36,9 @@ function LoginForm() {
             />
           )}
         </div>
+        <Link className="forgot-password" to={"/forgot-password"}>
+          You forgot your password?
+        </Link>
       </div>
       <CustomButton
         onClick={() => {

@@ -79,9 +79,20 @@
     }
   }
 
+  .forgot-password {
+    padding: 1.5em 0 0.5em 0;
+    text-decoration: none;
+    transition: 0.25s ease-in-out all;
+    color: rgba($secondaryColor, 0.75);
+    &:hover {
+      color: rgba($secondaryColor, 1);
+      cursor: pointer;
+    }
+  }
+
   button {
     width: 80%;
-    margin-top: 2em;
+    margin-top: 1em;
     align-self: center;
   }
 }

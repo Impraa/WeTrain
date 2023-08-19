@@ -4,6 +4,7 @@ import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Footer from "./layout/footer/Footer";
+import ForgotPassword from "./pages/Forgot-Password/ForgotPassword";
 
 function Router() {
   return (
@@ -12,6 +13,7 @@ function Router() {
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />

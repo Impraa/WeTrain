@@ -25,7 +25,7 @@
   border: none;
   cursor: pointer;
   border-radius: 2em;
-  transition: 0.6s cubic-bezier(0.5, 0, 0.75, 0) all;
+  transition: 0.1s cubic-bezier(0.5, 0, 0.75, 0) all;
   &:hover {
     color: $textColor;
     background-color: $secondaryColor;
