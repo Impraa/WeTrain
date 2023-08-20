@@ -36,7 +36,7 @@ function LoginForm() {
             />
           )}
         </div>
-        <Link className="forgot-password" to={"/forgot-password"}>
+        <Link className="forgot-password-link" to={"/forgot-password"}>
           You forgot your password?
         </Link>
       </div>
