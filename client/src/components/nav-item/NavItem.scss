@@ -2,14 +2,16 @@
 
 .nav-item {
   padding: 0.25em 0 0.25em 0;
+  background: linear-gradient(currentColor 0 0) bottom left/
+    var(--underline-width, 0%) 0.1em no-repeat;
   align-self: center;
+  display: inline-block;
   color: $textColor;
   text-decoration: none;
-  transition: 0.5s all ease-in-out;
+  transition: 0.25s all ease-in-out;
   font-weight: 500;
   &:hover {
-    box-shadow: inset 5em 0em 0em 0em $textColor;
-    color: $secondaryColor;
+    --underline-width: 100%;
   }
 }
 

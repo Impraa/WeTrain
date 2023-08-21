@@ -47,7 +47,7 @@ function Navbar() {
       <div className="logo-hamburger">
         <h1>We Train logo</h1>
         <span className="hamburger">
-          <Hamburger color="white" toggled={isOpen} toggle={setOpen} />
+          <Hamburger color={"#ff7043"} toggled={isOpen} toggle={setOpen} />
         </span>
       </div>
       <div className="nav-links">

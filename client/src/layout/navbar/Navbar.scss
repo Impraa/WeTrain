@@ -1,12 +1,12 @@
 @import "../../utils/variables";
 .navbar {
-  background-color: $navAndFooterColor;
+  background-color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 1em;
   z-index: 1;
-  color: $textColor;
+  color: $textSecondColor;
   .logo-hamburger {
     display: flex;
     align-items: center;
@@ -24,8 +24,15 @@
     flex-direction: column;
   }
 
+  .nav-links {
+    .nav-item {
+      color: $textSecondColor;
+    }
+  }
+
   .auth {
     .nav-item {
+      color: $textSecondColor;
       margin: 0 1em;
     }
   }

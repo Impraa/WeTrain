@@ -1,7 +1,7 @@
 @import "../../utils/variables";
 
 footer {
-  background-color: $navAndFooterColor;
+  background-color: $footerColor;
   color: $textColor;
   display: flex;
   flex-direction: column;
@@ -11,8 +11,23 @@ footer {
 
 @media (min-width: 768px) {
   footer {
+    width: 75%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 0.5em auto;
+    border-radius: 2em;
+  }
+}
+
+@media (min-width: 1240px) {
+  footer {
+    width: 65%;
+  }
+}
+
+@media (min-width: 1440px) {
+  footer {
+    width: 50%;
   }
 }

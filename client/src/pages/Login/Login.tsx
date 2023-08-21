@@ -5,6 +5,7 @@ function Login() {
   return (
     <div className="login">
       <LoginForm />
+      <div className="image"></div>
     </div>
   );
 }

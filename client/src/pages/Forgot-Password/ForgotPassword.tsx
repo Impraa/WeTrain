@@ -4,9 +4,9 @@ function ForgotPassword() {
   return (
     <div className="forgot-password">
       <div className="content">
-        <h2>You have forgotten your password?</h2>
+        <h2>Have you forgotten your password?</h2>
         <h3>
-          No problem, provide your email and we will allow you to reset your
+          No problem, provide us your email and we will allow you to reset your
           password!
         </h3>
         <div className="email">
