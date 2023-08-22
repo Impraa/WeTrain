@@ -1,0 +1,112 @@
+@import "../../utils/variables.scss";
+
+.register-form {
+  background-color: rgba(255, 255, 255);
+  border-radius: 2em;
+  height: 51em;
+  width: 17.5em;
+  display: flex;
+  padding: 1em 0 0 0;
+  justify-content: flex-start;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  .email,
+  .fname,
+  .lname,
+  .username {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    padding: 1em 0;
+    label {
+      width: 80%;
+      font-size: 1.25em;
+      padding: 0.5em 0;
+      align-self: center;
+    }
+    input {
+      padding: 0.25em 0;
+      width: 80%;
+      border-color: rgba($secondaryColor, 0.3);
+      align-self: center;
+      font-size: 1.25em;
+      transition: border-color 0.25s;
+      &:hover {
+        border-color: rgba($secondaryColor, 0.5);
+      }
+      &:focus {
+        border-color: rgba($secondaryColor, 1);
+        outline: none;
+      }
+    }
+  }
+
+  .password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1em 0;
+    label {
+      font-size: 1.25em;
+      padding: 0.5em 0;
+      width: 80%;
+    }
+    .password-input {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      input {
+        flex: 1;
+        width: 80%;
+        font-size: 1.25em;
+        padding: 0.25em 0;
+        border-color: rgba($secondaryColor, 0.3);
+        width: 80%;
+        &:hover {
+          border-color: rgba($secondaryColor, 0.5);
+        }
+        &:focus {
+          border-color: rgba($secondaryColor, 1);
+          outline: none;
+        }
+      }
+      svg {
+        height: 2em;
+        width: 2em;
+        position: absolute;
+        transform: translate(575%, -0.25em);
+        cursor: pointer;
+        align-self: flex-end;
+      }
+    }
+  }
+  button {
+    width: 80%;
+    margin-top: 1em;
+    align-self: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .register-form {
+    padding: 1em 0 0 1em;
+    width: 90em;
+    min-width: 306px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .register-form {
+    max-width: 405.16px;
+    .password {
+      .password-input {
+        svg {
+          transform: translate(850%, -0.25em);
+        }
+      }
+    }
+  }
+}

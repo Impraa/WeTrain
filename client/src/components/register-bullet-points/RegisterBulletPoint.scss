@@ -1,0 +1,21 @@
+.register-bullet-point {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1em;
+  svg {
+    width: 2em;
+    height: 2em;
+  }
+}
+
+@media (min-width: 768px) {
+  .register-bullet-point {
+    h3 {
+      font-size: 1.25em;
+    }
+    p {
+      font-size: 1.1em;
+    }
+  }
+}
