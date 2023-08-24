@@ -3,17 +3,17 @@
 .register-form {
   background-color: rgba(255, 255, 255);
   border-radius: 2em;
-  height: 51em;
   width: 17.5em;
   display: flex;
-  padding: 1em 0 0 0;
+  padding: 1em 0 1em 0;
   justify-content: flex-start;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   .email,
   .fname,
   .lname,
-  .username {
+  .username,
+  .birthday {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -26,6 +26,35 @@
       align-self: center;
     }
     input {
+      padding: 0.25em 0;
+      width: 80%;
+      border-color: rgba($secondaryColor, 0.3);
+      align-self: center;
+      font-size: 1.25em;
+      transition: border-color 0.25s;
+      &:hover {
+        border-color: rgba($secondaryColor, 0.5);
+      }
+      &:focus {
+        border-color: rgba($secondaryColor, 1);
+        outline: none;
+      }
+    }
+  }
+
+  .gender {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    padding: 1em 0;
+    label {
+      width: 80%;
+      font-size: 1.25em;
+      padding: 0.5em 0;
+      align-self: center;
+    }
+    select {
       padding: 0.25em 0;
       width: 80%;
       border-color: rgba($secondaryColor, 0.3);
@@ -92,7 +121,8 @@
 
 @media (min-width: 768px) {
   .register-form {
-    padding: 1em 0 0 1em;
+    padding: 1em 0 1em 1em;
+    margin: 0 0 1em 0;
     width: 90em;
     min-width: 306px;
   }

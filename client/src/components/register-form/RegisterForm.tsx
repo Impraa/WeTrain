@@ -25,7 +25,20 @@ export const RegisterForm = () => {
         <label htmlFor="email">Email</label>
         <input type="text" id="email" name="email" />
       </div>
-
+      <div className="birthday">
+        <label htmlFor="birthday">Birthday</label>
+        <input type="date" id="birthday" name="birthday" />
+      </div>
+      <div className="gender">
+        <label htmlFor="gender">Gender</label>
+        <select name="gender" id="gender">
+          <option hidden value="">
+            --Please choose a gender--
+          </option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
       <div className="password">
         <label htmlFor="password">Password</label>
         <div className="password-input">
