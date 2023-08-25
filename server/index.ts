@@ -1,10 +1,16 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { sequelize } from "./utils/database";
+import User from "./routes/User";
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use("/user", User);
+
+app.all("*", (req: Request, res: Response, next: NextFunction) => {
+  res.status(404).send("Method not found");
 });
 
 app.listen(3000, () => {

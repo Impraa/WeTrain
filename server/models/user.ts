@@ -7,11 +7,11 @@ const User = sequelize.define("users", {
     autoIncrement: true,
     primaryKey: true,
   },
-  fname: {
+  fName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lname: {
+  lName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -37,9 +37,9 @@ const User = sequelize.define("users", {
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  private: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: "false" },
+  private: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
   role: {
     type: DataTypes.STRING,
     allowNull: false,
