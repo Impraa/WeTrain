@@ -73,6 +73,7 @@ export const RegisterForm = () => {
         </div>
       </div>
       <CustomButton
+        disable={true}
         onClick={() => {
           console.log("mjau");
         }}

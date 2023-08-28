@@ -31,3 +31,24 @@
     background-color: $secondaryColor;
   }
 }
+
+.disable {
+  padding: 1em 2em;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: $textColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $disabledButton;
+  border: none;
+  border-radius: 2em;
+  transition: 0.6s cubic-bezier(0.5, 0, 0.75, 0) all;
+  .animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.5em;
+    height: 5em;
+  }
+}
