@@ -12,12 +12,12 @@ const CustomButton: React.FC<CustomButtonInter> = ({
   return (
     <button
       className={
-        disable ? "disable" : type === "normal" ? "normal" : "inverted"
+        !disable ? "disable" : type === "normal" ? "normal" : "inverted"
       }
       onClick={onClick}
       disabled={disable}
     >
-      {disable ? (
+      {!disable ? (
         <div className="animation-container">
           <Lottie
             options={{
