@@ -4,8 +4,12 @@ import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import "./RegisterForm.scss";
 import CustomButton from "../custom-button/CustomButton";
 import { UserRegister } from "../../../../types/User";
+import { registerUser } from "../../services/User";
+import { setUserAsync } from "../../redux/user/UserAction";
+import { useDispatch } from "react-redux";
 
 export const RegisterForm = () => {
+  const dispatch = useDispatch();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserRegister>({
     fname: "",
@@ -17,13 +21,25 @@ export const RegisterForm = () => {
     password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
 
     setFormData((prevFormData: UserRegister) => ({
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = async () => {
+    const user = await registerUser(formData);
+
+    console.log(user);
+
+    /*   setUserAsync(dispatch, user); */
   };
 
   return (
@@ -79,7 +95,7 @@ export const RegisterForm = () => {
       </div>
       <div className="gender">
         <label htmlFor="gender">Gender</label>
-        <select name="gender" id="gender">
+        <select name="gender" onChange={handleChange} id="gender">
           <option hidden value="">
             --Please choose a gender--
           </option>
@@ -91,6 +107,8 @@ export const RegisterForm = () => {
         <label htmlFor="password">Password</label>
         <div className="password-input">
           <input
+            onChange={handleChange}
+            value={formData.password}
             type={isPasswordVisible ? "text" : "password"}
             id="password"
             name="password"
@@ -120,13 +138,7 @@ export const RegisterForm = () => {
           />
         </div>
       </div>
-      <CustomButton
-        disable={true}
-        onClick={() => {
-          console.log("mjau");
-        }}
-        type="normal"
-      >
+      <CustomButton onClick={handleSubmit} type="normal">
         Register now!
       </CustomButton>
     </div>
