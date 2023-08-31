@@ -15,11 +15,13 @@
 .error {
   background-color: $errorColor;
   display: flex;
+  color: white;
+  text-align: center;
   align-items: center;
   justify-content: center;
   align-self: center;
   margin-top: 0.5em;
   width: 80%;
-  padding: 0.25em;
+  padding: 0.5em;
   border-radius: 0.25em;
 }

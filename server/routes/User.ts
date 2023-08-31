@@ -9,8 +9,8 @@ const router = express.Router();
 router.post("/register", async (req: Request, res: Response) => {
   try {
     const {
-      fName,
-      lName,
+      fname,
+      lname,
       username,
       email,
       birthday,
@@ -20,13 +20,19 @@ router.post("/register", async (req: Request, res: Response) => {
       role,
     } = req.body;
 
-    console.log(req.body);
+    if (!fname || !lname || !username || !email || !password) {
+      return res
+        .status(400)
+        .json(
+          "Error First name, Last name, Username, Email or Password missing"
+        );
+    }
 
     const hashPassword = bcrypt.hashSync(password, 10);
 
     const user = await User.create({
-      fName,
-      lName,
+      fName: fname,
+      lName: lname,
       email,
       username,
       birthday,

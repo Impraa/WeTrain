@@ -6,10 +6,19 @@ import CustomButton from "../custom-button/CustomButton";
 import { UserRegister } from "../../../../types/User";
 import { registerUser } from "../../services/User";
 import { setUserAsync } from "../../redux/user/UserAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectUserError,
+  selectUserIsLoading,
+} from "../../redux/user/UserSelector";
+import { Message } from "../message/Message";
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectUserIsLoading);
+  const error = useSelector(selectUserError);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserRegister>({
     fname: "",
@@ -35,15 +44,16 @@ export const RegisterForm = () => {
   };
 
   const handleSubmit = async () => {
-    const user = await registerUser(formData);
+    const userData = await registerUser(formData);
 
-    console.log(user);
+    console.log(userData);
 
-    /*   setUserAsync(dispatch, user); */
+    setUserAsync(dispatch, userData);
   };
 
   return (
     <div className="register-form">
+      {error && <Message type="error">{error}</Message>}
       <div className="fname">
         <label htmlFor="fname">First Name</label>
         <input
@@ -138,7 +148,11 @@ export const RegisterForm = () => {
           />
         </div>
       </div>
-      <CustomButton onClick={handleSubmit} type="normal">
+      <CustomButton
+        disable={isLoading ? true : false}
+        onClick={handleSubmit}
+        type="normal"
+      >
         Register now!
       </CustomButton>
     </div>

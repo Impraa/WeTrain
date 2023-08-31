@@ -8,20 +8,25 @@ export const setUserStart = () => {
   return createAction(UserActionType.SET_USER_START);
 };
 
-export const setUserFailed = (error: Error) => {
+export const setUserFailed = (error: string) => {
   return createAction(UserActionType.SET_USER_FALIED, error);
 };
 
 export const setUserSuccess = (user: User) => {
-  createAction(UserActionType.SET_USER_SUCCESS, user);
+  return createAction(UserActionType.SET_USER_SUCCESS, user);
 };
 
 export const setUserAsync = async (
   dispatch: Dispatch,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: Promise<AxiosResponse<any, any>>
+  userData: AxiosResponse<any, any>
 ) => {
+  console.log(userData);
   dispatch(setUserStart());
-  //User fetch function
-  user;
+
+  if (userData.data) {
+    dispatch(setUserSuccess(userData.data as User));
+  } else {
+    dispatch(setUserFailed(userData.statusText));
+  }
 };

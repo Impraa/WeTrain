@@ -13,3 +13,8 @@ export interface User extends UserRegister {
   private: boolean;
   role: "user" | "trainer" | "employee" | "admin";
 }
+
+export interface UserLogin {
+  username: string;
+  password: string;
+}
