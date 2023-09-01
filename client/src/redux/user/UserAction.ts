@@ -1,8 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "../../../../types/User";
+import { User, UserRegister } from "../../../../types/User";
 import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
-import { AxiosResponse } from "axios";
+import { registerUser } from "../../services/User";
 
 export const setUserStart = () => {
   return createAction(UserActionType.SET_USER_START);
@@ -19,14 +19,16 @@ export const setUserSuccess = (user: User) => {
 export const setUserAsync = async (
   dispatch: Dispatch,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  userData: AxiosResponse<any, any>
+  formData: UserRegister
 ) => {
-  console.log(userData);
   dispatch(setUserStart());
+
+  const userData = await registerUser(formData);
 
   if (userData.data) {
     dispatch(setUserSuccess(userData.data as User));
   } else {
+    window.scrollTo(0, 0);
     dispatch(setUserFailed(userData.statusText));
   }
 };

@@ -1,23 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconEye from "../../assets/IconEye";
 import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import "./RegisterForm.scss";
 import CustomButton from "../custom-button/CustomButton";
 import { UserRegister } from "../../../../types/User";
-import { registerUser } from "../../services/User";
 import { setUserAsync } from "../../redux/user/UserAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   selectUserError,
   selectUserIsLoading,
 } from "../../redux/user/UserSelector";
 import { Message } from "../message/Message";
+import { selectCurrentUser } from "../../redux/user/UserSelector";
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const user = useSelector(selectCurrentUser);
   const isLoading = useSelector(selectUserIsLoading);
-  const error = useSelector(selectUserError);
+  const serverError = useSelector(selectUserError);
+
+  const [error, setError] = useState<string>("");
+  const [confirmPass, setConfirmPass] = useState<string>("");
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setError(serverError);
+  }, [serverError]);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserRegister>({
@@ -44,11 +60,11 @@ export const RegisterForm = () => {
   };
 
   const handleSubmit = async () => {
-    const userData = await registerUser(formData);
-
-    console.log(userData);
-
-    setUserAsync(dispatch, userData);
+    if (formData.password !== confirmPass) {
+      window.scrollTo(0, 0);
+      return setError("Passwords not matching");
+    }
+    setUserAsync(dispatch, formData);
   };
 
   return (
@@ -142,6 +158,10 @@ export const RegisterForm = () => {
         <label htmlFor="cpassword">Confirm Password</label>
         <div className="password-input">
           <input
+            onChange={(e) => {
+              setConfirmPass(e.target.value);
+            }}
+            value={confirmPass}
             type={isPasswordVisible ? "text" : "password"}
             id="cpassword"
             name="cpassword"
