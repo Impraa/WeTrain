@@ -20,12 +20,8 @@ router.post("/register", async (req: Request, res: Response) => {
       role,
     } = req.body;
 
-    if (!fname || !lname || !username || !email || !password) {
-      return res
-        .status(400)
-        .json(
-          "Error First name, Last name, Username, Email or Password missing"
-        );
+    if (!fname || !lname || !username || !email || !password || !gender) {
+      return res.status(400).json("Error missing manditory fields");
     }
 
     const hashPassword = bcrypt.hashSync(password, 10);
@@ -52,6 +48,10 @@ router.post("/login", async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      return res.status(400).json("Error missing manditory fields");
+    }
+
     const user = (await User.findOne({
       where: {
         email: email,
@@ -59,12 +59,12 @@ router.post("/login", async (req: Request, res: Response) => {
     })) as Model<UserInter>;
 
     if (!bcrypt.compareSync(password, user.dataValues.password)) {
-      return res.status(404).json({ error: "Email or password incorrect" });
+      return res.status(404).json("Email or password incorrect");
     }
 
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: "Failed to retrieve the user" });
+    res.status(500).json("Failed to retrieve the user");
   }
 });
 

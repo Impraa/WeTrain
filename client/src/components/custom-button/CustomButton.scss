@@ -33,7 +33,7 @@
 }
 
 .disable {
-  padding: 1em 2em;
+  padding: 0.5em 2em;
   font-size: 1.15em;
   font-weight: bold;
   color: $textColor;
@@ -43,7 +43,7 @@
   background-color: $disabledButton;
   border: none;
   border-radius: 2em;
-  transition: 0.6s cubic-bezier(0.5, 0, 0.75, 0) all;
+  transition: 0.25s ease-in-out all;
   .animation-container {
     display: flex;
     justify-content: center;
