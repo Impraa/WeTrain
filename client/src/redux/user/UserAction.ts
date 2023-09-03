@@ -16,6 +16,10 @@ export const setUserSuccess = (user: User) => {
   return createAction(UserActionType.SET_USER_SUCCESS, user);
 };
 
+export const logoutUser = (user: User) => {
+  return createAction(UserActionType.LOGOUT_USER, user);
+};
+
 export const registerUserAsync = async (
   dispatch: Dispatch,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

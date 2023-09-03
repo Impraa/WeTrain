@@ -12,7 +12,13 @@ const CustomButton: React.FC<CustomButtonInter> = ({
   return (
     <button
       className={
-        disable ? "disable" : type === "normal" ? "normal" : "inverted"
+        disable
+          ? "disable"
+          : type === "normal"
+          ? "normal"
+          : type === "inverted"
+          ? "inverted"
+          : "nav-button"
       }
       onClick={onClick}
       disabled={disable}

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { User } from "../../../../../types/User";
 
 export interface NavItemProps {
   path: string;
@@ -10,4 +11,8 @@ export interface CustomButton {
   onClick: () => void;
   type: string;
   disable?: boolean;
+}
+
+export interface UserNavBox {
+  user: User;
 }
