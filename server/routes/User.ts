@@ -1,7 +1,14 @@
+import dotenv from "dotenv";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: "../.env" });
+}
+
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/user";
 import { Model } from "sequelize";
+import Jwt from "jsonwebtoken";
 import { User as UserInter } from "../../types/User";
 
 const router = express.Router();
@@ -38,7 +45,11 @@ router.post("/register", async (req: Request, res: Response) => {
       role,
     });
 
-    res.status(201).json(user);
+    const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+      expiresIn: "1h",
+    }).toString();
+
+    res.status(201).json(token);
   } catch (error) {
     res.status(500).send("Database error " + error);
   }
@@ -62,7 +73,11 @@ router.post("/login", async (req: Request, res: Response) => {
       return res.status(404).json("Email or password incorrect");
     }
 
-    res.status(200).json(user);
+    const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+      expiresIn: "1h",
+    }).toString();
+
+    res.status(200).json(token);
   } catch (error) {
     res.status(500).json("Failed to retrieve the user");
   }

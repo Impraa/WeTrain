@@ -1,3 +1,5 @@
+import buffer from "buffer";
+global.Buffer = buffer.Buffer;
 import axios, { AxiosResponse } from "axios";
 import { UserLogin, UserRegister } from "../../../types/User";
 

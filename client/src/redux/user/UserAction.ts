@@ -2,6 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { User, UserLogin, UserRegister } from "../../../../types/User";
 import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
+import Jwt from "jsonwebtoken";
 import { loginUser, registerUser } from "../../services/User";
 
 export const setUserStart = () => {
@@ -30,7 +31,12 @@ export const registerUserAsync = async (
   const userData = await registerUser(formData);
 
   if (userData.data) {
-    dispatch(setUserSuccess(userData.data as User));
+    try {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user as User));
+    } catch (error) {
+      dispatch(setUserFailed("Invalid token " + error));
+    }
   } else {
     window.scrollTo(0, 0);
     dispatch(setUserFailed(userData.statusText));
@@ -43,11 +49,15 @@ export const loginUserAsync = async (
   formData: UserLogin
 ) => {
   dispatch(setUserStart());
-
   const userData = await loginUser(formData);
 
   if (userData.data) {
-    dispatch(setUserSuccess(userData.data as User));
+    try {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user as User));
+    } catch (error) {
+      dispatch(setUserFailed("Invalid token " + error));
+    }
   } else {
     window.scrollTo(0, 0);
     dispatch(setUserFailed(userData.statusText));

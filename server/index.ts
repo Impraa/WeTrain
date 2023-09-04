@@ -3,6 +3,11 @@ import { sequelize } from "./utils/database";
 import User from "./routes/User";
 import cors from "cors";
 
+import dotenv from "dotenv";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: "../.env" });
+}
 const app = express();
 
 app.use(
@@ -22,7 +27,7 @@ app.all("*", (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(3000, () => {
-  console.log("Listening on a port 3000!");
+  console.log(process.env.PORT || "Listening on a port 3000!");
   sequelize
     .sync()
     .then(() => {
