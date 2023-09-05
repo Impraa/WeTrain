@@ -40,6 +40,10 @@ const User = sequelize.define("users", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  qrCode: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   private: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
   role: {
     type: DataTypes.STRING,

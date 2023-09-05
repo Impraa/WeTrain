@@ -12,6 +12,7 @@ export interface User extends UserRegister {
   image: string;
   private: boolean;
   role: "user" | "trainer" | "employee" | "admin";
+  qrCode: string;
 }
 
 export interface UserLogin {

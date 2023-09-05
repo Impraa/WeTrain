@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: "../.env" });
 }
 
+import QRCode from "qrcode";
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/user";
@@ -33,6 +34,20 @@ router.post("/register", async (req: Request, res: Response) => {
 
     const hashPassword = bcrypt.hashSync(password, 10);
 
+    const userData = {
+      fName: fname,
+      lName: lname,
+      email,
+      username,
+      birthday,
+      gender,
+      password: hashPassword,
+      image,
+      role,
+    };
+
+    const qrCodeDataURL = await QRCode.toDataURL(JSON.stringify(userData));
+
     const user = await User.create({
       fName: fname,
       lName: lname,
@@ -43,6 +58,7 @@ router.post("/register", async (req: Request, res: Response) => {
       password: hashPassword,
       image,
       role,
+      qrCode: qrCodeDataURL,
     });
 
     const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
