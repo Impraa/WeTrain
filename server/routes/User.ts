@@ -11,14 +11,15 @@ import User from "../models/user";
 import { Model } from "sequelize";
 import Jwt from "jsonwebtoken";
 import { User as UserInter } from "../../types/User";
+import { sendVerifyLink } from "../utils/sendEmail";
 
 const router = express.Router();
 
 router.post("/register", async (req: Request, res: Response) => {
   try {
     const {
-      fname,
-      lname,
+      fName,
+      lName,
       username,
       email,
       birthday,
@@ -28,15 +29,15 @@ router.post("/register", async (req: Request, res: Response) => {
       role,
     } = req.body;
 
-    if (!fname || !lname || !username || !email || !password || !gender) {
+    if (!fName || !lName || !username || !email || !password || !gender) {
       return res.status(400).json("Error missing manditory fields");
     }
 
     const hashPassword = bcrypt.hashSync(password, 10);
 
     const userData = {
-      fName: fname,
-      lName: lname,
+      fName: fName,
+      lName: lName,
       email,
       username,
       birthday,
@@ -49,8 +50,8 @@ router.post("/register", async (req: Request, res: Response) => {
     const qrCodeDataURL = await QRCode.toDataURL(JSON.stringify(userData));
 
     const user = await User.create({
-      fName: fname,
-      lName: lname,
+      fName: fName,
+      lName: lName,
       email,
       username,
       birthday,
@@ -58,8 +59,11 @@ router.post("/register", async (req: Request, res: Response) => {
       password: hashPassword,
       image,
       role,
+      verified: false,
       qrCode: qrCodeDataURL,
     });
+
+    sendVerifyLink(user.dataValues as UserInter, user.dataValues.email);
 
     const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
       expiresIn: "1h",

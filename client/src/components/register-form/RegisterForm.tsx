@@ -37,8 +37,8 @@ export const RegisterForm = () => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserRegister>({
-    fname: "",
-    lname: "",
+    fName: "",
+    lName: "",
     username: "",
     email: "",
     birthday: new Date("1969-01-26"),
@@ -71,23 +71,23 @@ export const RegisterForm = () => {
     <div className="register-form">
       {error && <Message type="error">{error}</Message>}
       <div className="fname">
-        <label htmlFor="fname">First Name</label>
+        <label htmlFor="fName">First Name</label>
         <input
           onChange={handleChange}
-          value={formData.fname}
+          value={formData.fName}
           type="text"
-          id="fname"
-          name="fname"
+          id="fName"
+          name="fName"
         />
       </div>
       <div className="lname">
-        <label htmlFor="lname">Last Name</label>
+        <label htmlFor="lName">Last Name</label>
         <input
           onChange={handleChange}
-          value={formData.lname}
+          value={formData.lName}
           type="text"
-          id="lname"
-          name="lname"
+          id="lName"
+          name="lName"
         />
       </div>
       <div className="username">

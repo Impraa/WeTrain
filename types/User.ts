@@ -1,6 +1,6 @@
 export interface UserRegister {
-  fname: string;
-  lname: string;
+  fName: string;
+  lName: string;
   username: string;
   email: string;
   birthday: Date;
@@ -9,6 +9,8 @@ export interface UserRegister {
 }
 
 export interface User extends UserRegister {
+  id: string;
+  verified: boolean;
   image: string;
   private: boolean;
   role: "user" | "trainer" | "employee" | "admin";

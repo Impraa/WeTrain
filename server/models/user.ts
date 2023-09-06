@@ -44,7 +44,11 @@ const User = sequelize.define("users", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  private: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
+  verified: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  private: { type: DataTypes.BOOLEAN, defaultValue: false },
   role: {
     type: DataTypes.STRING,
     allowNull: false,
