@@ -27,12 +27,12 @@ export const RegisterForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/email-sent");
     }
   }, [user]);
 
   useEffect(() => {
-    setError(serverError);
+    if (serverError) setError(serverError);
   }, [serverError]);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);

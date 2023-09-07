@@ -1,22 +1,30 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./layout/navbar/Navbar";
-import Homepage from "./pages/homepage/Homepage";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import Footer from "./layout/footer/Footer";
-import ForgotPassword from "./pages/Forgot-Password/ForgotPassword";
+import { Suspense, lazy } from "react";
+
+const Homepage = lazy(() => import("./pages/homepage/Homepage"));
+const Navbar = lazy(() => import("./layout/navbar/Navbar"));
+const Footer = lazy(() => import("./layout/footer/Footer"));
+const Register = lazy(() => import("./pages/Register/Register"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const ForgotPassword = lazy(
+  () => import("./pages/Forgot-Password/ForgotPassword")
+);
+const EmailSent = lazy(() => import("./pages/Email-Sent/EmailSent"));
 
 function Router() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route index element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-      <Footer />
+      <Suspense>
+        <Navbar />
+        <Routes>
+          <Route index element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/email-sent" element={<EmailSent />} />
+        </Routes>
+        <Footer />
+      </Suspense>
     </>
   );
 }
