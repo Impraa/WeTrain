@@ -103,4 +103,16 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/verify", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body;
+
+    await User.update({ verified: true }, { where: { id: id } });
+
+    res.status(200).send("User verified successfully");
+  } catch (error) {
+    res.status(500).json("Failed to verify the user");
+  }
+});
+
 export default router;
