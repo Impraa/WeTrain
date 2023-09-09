@@ -109,7 +109,15 @@ router.post("/verify", async (req: Request, res: Response) => {
 
     await User.update({ verified: true }, { where: { id: id } });
 
-    res.status(200).send("User verified successfully");
+    const user = (await User.findOne({
+      where: { id: id },
+    })) as Model<UserInter>;
+
+    const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+      expiresIn: "1h",
+    }).toString();
+
+    res.status(200).send(token);
   } catch (error) {
     res.status(500).json("Failed to verify the user");
   }
