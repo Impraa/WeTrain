@@ -1,0 +1,55 @@
+@import "../../utils/variables.scss";
+.verify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 70vh;
+  padding: 0 0.5em;
+  color: $secondaryColor;
+  text-align: center;
+
+  .animation-container {
+    height: 15em;
+    width: 15em;
+  }
+  h2 {
+    font-weight: 500;
+    text-shadow: 1em;
+    text-shadow: 20em 20em 20em var(black);
+  }
+  .link {
+    padding: 0.75em 1em;
+    margin: 1em 0;
+    text-transform: uppercase;
+    background-color: $secondaryColor;
+    border: none;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    border-radius: 1em;
+    transition: 0.5s all ease-in-out;
+    &:hover {
+      box-shadow: inset 0em 0em 0em 5em $textColor;
+      color: $secondaryColor;
+    }
+  }
+  .sad-animation {
+    width: 7.5em;
+    height: 15em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .verify {
+    .animation-container {
+      height: 20em;
+      width: 20em;
+    }
+    .sad-animation {
+      width: 10em;
+      height: 20em;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { User, UserLogin, UserRegister } from "../../../../types/User";
 import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
 import Jwt from "jsonwebtoken";
-import { loginUser, registerUser } from "../../services/User";
+import { loginUser, registerUser, verifyUser } from "../../services/User";
 
 export const setUserStart = () => {
   return createAction(UserActionType.SET_USER_START);
@@ -57,6 +57,26 @@ export const loginUserAsync = async (
       dispatch(setUserSuccess(user as User));
     } catch (error) {
       dispatch(setUserFailed("Invalid token " + error));
+    }
+  } else {
+    window.scrollTo(0, 0);
+    dispatch(setUserFailed(userData.statusText));
+  }
+};
+
+export const verifyUserAsync = async (
+  dispatch: Dispatch,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  id: string
+) => {
+  dispatch(setUserStart());
+  const userData = await verifyUser(id);
+  if (userData.data) {
+    try {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user as User));
+    } catch (error) {
+      dispatch(setUserFailed("Cannot verify " + error));
     }
   } else {
     window.scrollTo(0, 0);
