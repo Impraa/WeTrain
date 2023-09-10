@@ -1,0 +1,29 @@
+@import "../../utils/variables.scss";
+.error404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 70vh;
+  text-align: center;
+  padding: 0em 0.75em;
+  color: $secondaryColor;
+  .animation-container {
+    width: 15em;
+    height: 15em;
+    padding: 0.5em 0;
+  }
+  h2 {
+    font-weight: 800;
+    color: $errorColor;
+  }
+}
+
+@media (min-width: 1024px) {
+  .error404 {
+    .animation-container {
+      height: 20em;
+      width: 20em;
+    }
+  }
+}
