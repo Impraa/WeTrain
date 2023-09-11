@@ -16,7 +16,8 @@ export const UserBoxNav: React.FC<UserNavBox> = ({ user }) => {
     <>
       {" "}
       <div className="user-info">
-        <p>Hello,</p> <NavItem path="/profile">{user.username}</NavItem>{" "}
+        <p>Hello,</p>{" "}
+        <NavItem path={`/profile/${user.id}`}>{user.username}</NavItem>{" "}
       </div>
       <CustomButton onClick={logoutHandler} type="nav-button">
         Logout

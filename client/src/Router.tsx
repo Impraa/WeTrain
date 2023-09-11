@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Verify } from "./pages/Verify/Verify";
-import { Error404 } from "./pages/Error404/Error404";
+import { BasicInfo } from "./pages/Profile/Basic-Info/BasicInfo";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -12,6 +12,8 @@ const ForgotPassword = lazy(
   () => import("./pages/Forgot-Password/ForgotPassword")
 );
 const EmailSent = lazy(() => import("./pages/Email-Sent/EmailSent"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
+const Error404 = lazy(() => import("./pages/Error404/Error404"));
 
 function Router() {
   return (
@@ -25,6 +27,9 @@ function Router() {
           <Route path="/register" element={<Register />} />
           <Route path="/email-sent" element={<EmailSent />} />
           <Route path="/verify/:id" element={<Verify />} />
+          <Route path="/profile/:id" element={<Profile />}>
+            <Route index element={<BasicInfo />} />
+          </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />

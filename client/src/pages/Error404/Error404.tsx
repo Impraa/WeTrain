@@ -1,7 +1,7 @@
 import Lottie from "react-lottie";
 import animationData from "../../assets/Error404.json";
 import "./Error404.scss";
-export const Error404 = () => {
+const Error404 = () => {
   return (
     <div className="error404">
       {" "}
@@ -25,3 +25,5 @@ export const Error404 = () => {
     </div>
   );
 };
+
+export default Error404;
