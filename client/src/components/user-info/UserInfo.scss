@@ -1,0 +1,55 @@
+.user-info-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1.25em 1em;
+
+  .profile-picture {
+    display: flex;
+    transition: all 0.25s ease-in-out;
+    align-items: center;
+    border: 2px solid black;
+    width: 15em;
+    height: 14em;
+    border-radius: 50%;
+    margin: 0 0 2em 0;
+    .pencil-icon {
+      width: 7.5em;
+      height: 5em;
+      transform: translate(4em, 0);
+      position: absolute;
+      visibility: none;
+      opacity: 0;
+      color: white;
+    }
+    svg {
+      z-index: -1;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      .pencil-icon {
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+  }
+  h3 {
+    font-size: 1.75em;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-info-card {
+    flex-direction: row;
+    .profile-picture {
+      margin: 0 4em 2em 0em;
+    }
+    h3 {
+      font-size: 2em;
+    }
+  }
+}

@@ -16,3 +16,7 @@ export interface CustomButton {
 export interface UserNavBox {
   user: User;
 }
+
+export interface UserInfo {
+  user: User;
+}
