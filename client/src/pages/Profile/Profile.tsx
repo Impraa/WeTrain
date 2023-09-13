@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import "./Profile.scss";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/UserSelector";
@@ -10,7 +9,6 @@ const Profile = () => {
   return (
     <div className="profile">
       <UserInfo user={user} />
-      <Outlet />
     </div>
   );
 };

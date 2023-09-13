@@ -5,6 +5,7 @@ import { Twirl as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/UserSelector";
 import { UserBoxNav } from "../../components/user-box-nav/UserBoxNav";
+import { ReactComponent as WeTrainLogo } from "../../assets/WeTrainLogoSite.svg";
 
 const NavItems = [
   {
@@ -50,7 +51,9 @@ function Navbar() {
       }
     >
       <div className="logo-hamburger">
-        <h1>We Train logo</h1>
+        <h1>
+          <WeTrainLogo />
+        </h1>
         <span className="hamburger">
           <Hamburger color={"#ff7043"} toggled={isOpen} toggle={setOpen} />
         </span>

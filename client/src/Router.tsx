@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Verify } from "./pages/Verify/Verify";
-import { BasicInfo } from "./pages/Profile/Basic-Info/BasicInfo";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -27,9 +26,8 @@ function Router() {
           <Route path="/register" element={<Register />} />
           <Route path="/email-sent" element={<EmailSent />} />
           <Route path="/verify/:id" element={<Verify />} />
-          <Route path="/profile/:id" element={<Profile />}>
-            <Route index element={<BasicInfo />} />
-          </Route>
+          <Route path="/profile/:id" element={<Profile />} />
+
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
