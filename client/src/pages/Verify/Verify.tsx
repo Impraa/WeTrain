@@ -43,7 +43,7 @@ export const Verify = () => {
         </>
       ) : (
         <>
-          {!user ? (
+          {user ? (
             <>
               {" "}
               <div className="animation-container">

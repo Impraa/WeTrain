@@ -7,11 +7,14 @@ if (process.env.NODE_ENV !== "production") {
 import QRCode from "qrcode";
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import multer from "multer";
 import User from "../models/user";
 import { Model } from "sequelize";
 import Jwt from "jsonwebtoken";
 import { User as UserInter } from "../../types/User";
 import { sendVerifyLink } from "../utils/sendEmail";
+import path from "path";
+import fs from "fs";
 
 const router = express.Router();
 
@@ -122,5 +125,45 @@ router.post("/verify", async (req: Request, res: Response) => {
     res.status(500).json("Failed to verify the user");
   }
 });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/user-profile-pictures");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const mimeType = fileTypes.test(file.mimetype);
+    const extname = fileTypes.test(path.extname(file.originalname));
+
+    if (mimeType && extname) {
+      return cb(null, true);
+    }
+  },
+}).single("image");
+
+router.post(
+  "/upload-profile-pic",
+  upload,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.body;
+
+      await User.update({ image: req.file!.path }, { where: { id: id } });
+
+      res.status(200).json({ message: "Image uploaded successfully." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error uploading image." });
+    }
+  }
+);
 
 export default router;

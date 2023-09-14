@@ -57,3 +57,24 @@ export const verifyUser = (id: string) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const uploadUserProfilePicture = (id: string, file: File) => {
+  return axios
+    .post(
+      "http://localhost:3000/user/upload-profile-pic",
+      { id: id, image: file },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

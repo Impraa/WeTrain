@@ -4,6 +4,7 @@ import User from "./routes/User";
 import cors from "cors";
 
 import dotenv from "dotenv";
+import path from "path";
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: "../.env" });
@@ -17,14 +18,18 @@ app.use(
   })
 );
 
+app.use(
+  "/public/user-profile-pictures",
+  express.static("./public/user-profile-pictures")
+);
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 app.use("/user", User);
 
-app.all("*", (req: Request, res: Response, next: NextFunction) => {
+/* app.all("*", (req: Request, res: Response, next: NextFunction) => {
   res.status(404).send("Method not found");
-});
+}); */
 
 app.listen(3000, () => {
   console.log(process.env.PORT || "Listening on a port 3000!");
