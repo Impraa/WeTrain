@@ -166,4 +166,18 @@ router.post(
   }
 );
 
+router.get("/get-user/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = (await User.findOne({
+      where: { id: id },
+    })) as Model<UserInter>;
+
+    res.status(200).send(user.dataValues);
+  } catch (error) {
+    return res.status(500).send("User not found");
+  }
+});
+
 export default router;

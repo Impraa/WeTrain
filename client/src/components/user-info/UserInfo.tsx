@@ -4,13 +4,11 @@ import "./UserInfo.scss";
 import { ReactComponent as WeTrainLogo } from "../../assets/WeTrainLogoSite.svg";
 import IconPencil from "../../assets/IconPencil";
 import CustomButton from "../custom-button/CustomButton";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { uploadUserProfilePicture } from "../../services/User";
 
 export const UserInfo: React.FC<UserInfoInter> = ({ user }) => {
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   const updateProfilePicture = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -18,16 +16,9 @@ export const UserInfo: React.FC<UserInfoInter> = ({ user }) => {
     if (e.target.files) {
       const selectedFile = e.target.files[0];
 
-      console.log(selectedFile);
       await uploadUserProfilePicture(id as string, selectedFile as File);
     }
   };
-
-  console.log(user.image);
-
-  if (!user) {
-    navigate("/login");
-  }
 
   return (
     <div className="user-info-card">

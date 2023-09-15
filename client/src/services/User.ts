@@ -78,3 +78,15 @@ export const uploadUserProfilePicture = (id: string, file: File) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const getSingleUser = (id: string) => {
+  return axios
+    .get(`http://localhost:3000/user/get-user/${id}`)
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

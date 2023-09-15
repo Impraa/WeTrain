@@ -5,6 +5,9 @@ const INITAL_STATE = {
   user: null,
   isLoading: false,
   error: null,
+  foundUser: null,
+  foundUserIsLoading: false,
+  foundUserError: null,
 };
 
 export const userReducer = (state = INITAL_STATE, action: AnyAction) => {
@@ -32,6 +35,21 @@ export const userReducer = (state = INITAL_STATE, action: AnyAction) => {
       return {
         ...state,
         user: null,
+      };
+    case UserActionType.SET_FOUND_USER_START:
+      return {
+        ...state,
+        foundUserIsLoading: true,
+      };
+    case UserActionType.SET_FOUND_USER_SUCCESS:
+      return {
+        ...state,
+        foundUser: payload,
+      };
+    case UserActionType.SET_FOUND_USER_FALIED:
+      return {
+        ...state,
+        selectFoundUserError: payload,
       };
     default:
       return state;

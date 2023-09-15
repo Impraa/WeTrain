@@ -3,7 +3,12 @@ import { User, UserLogin, UserRegister } from "../../../../types/User";
 import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
 import Jwt from "jsonwebtoken";
-import { loginUser, registerUser, verifyUser } from "../../services/User";
+import {
+  getSingleUser,
+  loginUser,
+  registerUser,
+  verifyUser,
+} from "../../services/User";
 
 export const setUserStart = () => {
   return createAction(UserActionType.SET_USER_START);
@@ -17,13 +22,24 @@ export const setUserSuccess = (user: User) => {
   return createAction(UserActionType.SET_USER_SUCCESS, user);
 };
 
+export const setFoundUserStart = () => {
+  return createAction(UserActionType.SET_FOUND_USER_START);
+};
+
+export const setFoundUserFailed = (error: string) => {
+  return createAction(UserActionType.SET_FOUND_USER_FALIED, error);
+};
+
+export const setFoundUserSuccess = (user: User) => {
+  return createAction(UserActionType.SET_FOUND_USER_SUCCESS, user);
+};
+
 export const logoutUser = (user: User) => {
   return createAction(UserActionType.LOGOUT_USER, user);
 };
 
 export const registerUserAsync = async (
   dispatch: Dispatch,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formData: UserRegister
 ) => {
   dispatch(setUserStart());
@@ -45,7 +61,6 @@ export const registerUserAsync = async (
 
 export const loginUserAsync = async (
   dispatch: Dispatch,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formData: UserLogin
 ) => {
   dispatch(setUserStart());
@@ -64,11 +79,7 @@ export const loginUserAsync = async (
   }
 };
 
-export const verifyUserAsync = async (
-  dispatch: Dispatch,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  id: string
-) => {
+export const verifyUserAsync = async (dispatch: Dispatch, id: string) => {
   dispatch(setUserStart());
   const userData = await verifyUser(id);
   if (userData.data) {
@@ -81,5 +92,18 @@ export const verifyUserAsync = async (
   } else {
     window.scrollTo(0, 0);
     dispatch(setUserFailed(userData.statusText));
+  }
+};
+
+export const getSingleUserAsync = async (dispatch: Dispatch, id: string) => {
+  dispatch(setFoundUserStart());
+  try {
+    const userData = await getSingleUser(id);
+
+    if (userData.status === 200) {
+      dispatch(setFoundUserSuccess(userData.data));
+    }
+  } catch (error) {
+    dispatch(setFoundUserFailed("Cannot find user " + error));
   }
 };
