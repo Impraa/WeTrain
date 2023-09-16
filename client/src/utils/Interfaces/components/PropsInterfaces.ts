@@ -20,3 +20,7 @@ export interface UserNavBox {
 export interface UserInfo {
   user: User;
 }
+
+export interface CheckAuth {
+  children: ReactNode;
+}

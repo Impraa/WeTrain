@@ -169,7 +169,7 @@ export const RegisterForm = () => {
         </div>
       </div>
       <CustomButton
-        disable={!isLoading ? true : false}
+        disable={isLoading ? true : false}
         onClick={handleSubmit}
         type="normal"
       >

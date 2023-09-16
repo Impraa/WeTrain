@@ -3,7 +3,7 @@ import IconEye from "../../assets/IconEye";
 import "./LoginForm.scss";
 import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import CustomButton from "../custom-button/CustomButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserLogin } from "../../../../types/User";
 import { loginUserAsync } from "../../redux/user/UserAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import { Message } from "../message/Message";
 function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserLogin>({
@@ -32,7 +33,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate(state?.path || "/");
     }
   }, [user]);
 

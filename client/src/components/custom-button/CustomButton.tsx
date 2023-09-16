@@ -1,7 +1,6 @@
 import "./CustomButton.scss";
 import { CustomButton as CustomButtonInter } from "../../utils/Interfaces/components/PropsInterfaces";
-import Lottie from "react-lottie";
-import animationData from "../../assets/LoadingAnimation.json";
+import Spinner from "../spinner/Spinner";
 
 const CustomButton: React.FC<CustomButtonInter> = ({
   children,
@@ -23,22 +22,7 @@ const CustomButton: React.FC<CustomButtonInter> = ({
       onClick={onClick}
       disabled={disable}
     >
-      {disable ? (
-        <div className="animation-container">
-          <Lottie
-            options={{
-              loop: true,
-              autoplay: true,
-              animationData: animationData,
-              rendererSettings: {
-                preserveAspectRatio: "xMidYMid slice",
-              },
-            }}
-          />
-        </div>
-      ) : (
-        children
-      )}
+      {disable ? <Spinner /> : children}
     </button>
   );
 };
