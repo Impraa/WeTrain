@@ -5,7 +5,7 @@ import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import CustomButton from "../custom-button/CustomButton";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserLogin } from "../../../../types/User";
-import { loginUserAsync } from "../../redux/user/UserAction";
+import { loginUserAsync, setUserFailed } from "../../redux/user/UserAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentUser,
@@ -54,8 +54,11 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     loginUserAsync(dispatch, formData);
+    if (user) {
+      dispatch(setUserFailed(null));
+    }
   };
 
   return (

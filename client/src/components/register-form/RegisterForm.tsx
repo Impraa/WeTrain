@@ -4,7 +4,7 @@ import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import "./RegisterForm.scss";
 import CustomButton from "../custom-button/CustomButton";
 import { UserRegister } from "../../../../types/User";
-import { registerUserAsync } from "../../redux/user/UserAction";
+import { registerUserAsync, setUserFailed } from "../../redux/user/UserAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -59,12 +59,15 @@ export const RegisterForm = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (formData.password !== confirmPass) {
       window.scrollTo(0, 0);
       return setError("Passwords not matching");
     }
     registerUserAsync(dispatch, formData);
+    if (user) {
+      dispatch(setUserFailed(null));
+    }
   };
 
   return (

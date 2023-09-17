@@ -14,6 +14,7 @@ export const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["isLoading", "error", "foundUserIsLoading", "foundUserError"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

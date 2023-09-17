@@ -7,6 +7,7 @@ import {
   getSingleUser,
   loginUser,
   registerUser,
+  uploadUserProfilePicture,
   verifyUser,
 } from "../../services/User";
 
@@ -14,11 +15,11 @@ export const setUserStart = () => {
   return createAction(UserActionType.SET_USER_START);
 };
 
-export const setUserFailed = (error: string) => {
+export const setUserFailed = (error: string | null) => {
   return createAction(UserActionType.SET_USER_FALIED, error);
 };
 
-export const setUserSuccess = (user: User) => {
+export const setUserSuccess = (user: User | null) => {
   return createAction(UserActionType.SET_USER_SUCCESS, user);
 };
 
@@ -26,11 +27,11 @@ export const setFoundUserStart = () => {
   return createAction(UserActionType.SET_FOUND_USER_START);
 };
 
-export const setFoundUserFailed = (error: string) => {
+export const setFoundUserFailed = (error: string | null) => {
   return createAction(UserActionType.SET_FOUND_USER_FALIED, error);
 };
 
-export const setFoundUserSuccess = (user: User) => {
+export const setFoundUserSuccess = (user: User | null) => {
   return createAction(UserActionType.SET_FOUND_USER_SUCCESS, user);
 };
 
@@ -106,4 +107,12 @@ export const getSingleUserAsync = async (dispatch: Dispatch, id: string) => {
   } catch (error) {
     dispatch(setFoundUserFailed("Cannot find user " + error));
   }
+};
+
+export const changeUserProfilePicAsync = async (
+  dispatch: Dispatch,
+  id: string,
+  file: File
+) => {
+  await uploadUserProfilePicture(id, file);
 };

@@ -5,10 +5,12 @@ import { ReactComponent as WeTrainLogo } from "../../assets/WeTrainLogoSite.svg"
 import IconPencil from "../../assets/IconPencil";
 import CustomButton from "../custom-button/CustomButton";
 import { Link, useParams } from "react-router-dom";
-import { uploadUserProfilePicture } from "../../services/User";
+import { changeUserProfilePicAsync } from "../../redux/user/UserAction";
+import { useDispatch } from "react-redux";
 
 export const UserInfo: React.FC<UserInfoInter> = ({ user }) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const updateProfilePicture = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -16,7 +18,7 @@ export const UserInfo: React.FC<UserInfoInter> = ({ user }) => {
     if (e.target.files) {
       const selectedFile = e.target.files[0];
 
-      await uploadUserProfilePicture(id as string, selectedFile as File);
+      changeUserProfilePicAsync(dispatch, id as string, selectedFile as File);
     }
   };
 

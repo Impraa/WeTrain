@@ -5,7 +5,10 @@ import {
   selectFoundUser,
 } from "../../redux/user/UserSelector";
 import { UserInfo } from "../../components/user-info/UserInfo";
-import { getSingleUserAsync } from "../../redux/user/UserAction";
+import {
+  getSingleUserAsync,
+  setFoundUserFailed,
+} from "../../redux/user/UserAction";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -19,6 +22,7 @@ const Profile = () => {
   useEffect(() => {
     if (!user) {
       getSingleUserAsync(dispatch, id as string);
+      dispatch(setFoundUserFailed(null));
     }
   }, [user, id, dispatch]);
 
