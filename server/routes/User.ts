@@ -156,9 +156,17 @@ router.post(
     try {
       const { id } = req.body;
 
-      await User.update({ image: req.file!.path }, { where: { id: id } });
+      const user = (await User.findOne({
+        where: { id: id },
+      })) as Model<UserInter>;
 
-      res.status(200).json({ message: "Image uploaded successfully." });
+      user.dataValues.image = req.file!.path;
+
+      const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+        expiresIn: "1h",
+      }).toString();
+
+      res.status(200).json(token);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Error uploading image." });
@@ -174,7 +182,11 @@ router.get("/get-user/:id", async (req: Request, res: Response) => {
       where: { id: id },
     })) as Model<UserInter>;
 
-    res.status(200).send(user.dataValues);
+    const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+      expiresIn: "1h",
+    }).toString();
+
+    res.status(200).send(token);
   } catch (error) {
     return res.status(500).send("User not found");
   }

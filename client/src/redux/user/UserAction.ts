@@ -102,7 +102,8 @@ export const getSingleUserAsync = async (dispatch: Dispatch, id: string) => {
     const userData = await getSingleUser(id);
 
     if (userData.status === 200) {
-      dispatch(setFoundUserSuccess(userData.data));
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setFoundUserSuccess(user));
     }
   } catch (error) {
     dispatch(setFoundUserFailed("Cannot find user " + error));
@@ -114,5 +115,14 @@ export const changeUserProfilePicAsync = async (
   id: string,
   file: File
 ) => {
-  await uploadUserProfilePicture(id, file);
+  try {
+    const userData = await uploadUserProfilePicture(id, file);
+
+    if (userData.status === 200) {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user));
+    }
+  } catch (error) {
+    dispatch(setUserFailed("Cannot find user " + error));
+  }
 };
