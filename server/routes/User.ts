@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 import QRCode from "qrcode";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
 import multer from "multer";
 import User from "../models/user";
@@ -14,6 +14,7 @@ import Jwt from "jsonwebtoken";
 import { User as UserInter } from "../../types/User";
 import { sendVerifyLink } from "../utils/sendEmail";
 import path from "path";
+import sharp from "sharp";
 import fs from "fs";
 
 const router = express.Router();
@@ -149,9 +150,46 @@ const upload = multer({
   },
 }).single("image");
 
+const resizeImage = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.file) {
+    // No file uploaded, move to the next middleware
+    return next();
+  }
+
+  const imagePath = req.file.path;
+
+  // Define the new image dimensions (e.g., 300x300 pixels)
+  const width = 300;
+  const height = 300;
+
+  const tempImagePath = path.join(
+    "public/user-profile-pictures",
+    "temp-" + req.file.filename
+  );
+
+  sharp(imagePath)
+    .resize(width, height)
+    .toFile(tempImagePath, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      // Resize is complete, replace the original image with the resized one
+      fs.rename(tempImagePath, imagePath, (renameErr) => {
+        if (renameErr) {
+          return next(renameErr);
+        }
+
+        // Successfully resized and replaced the image, move to the next middleware
+        next();
+      });
+    });
+};
+
 router.post(
   "/upload-profile-pic",
   upload,
+  resizeImage,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.body;
