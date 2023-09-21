@@ -37,10 +37,7 @@ export const UserInfo: React.FC<UserInfoInter> = ({ user }) => {
         <h3 className="username">{user.username}'s profile</h3>
         <div className="buttons">
           {user.id == id ? (
-            <Link
-              to={`/edit-profile/${user.id}`}
-              className="edit-profile-button"
-            >
+            <Link to={`/edit-profile`} className="edit-profile-button">
               Edit Profile
             </Link>
           ) : (

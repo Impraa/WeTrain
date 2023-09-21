@@ -24,3 +24,7 @@ export interface UserInfo {
 export interface CheckAuth {
   children: ReactNode;
 }
+
+export interface BasicInfo {
+  user: User;
+}
