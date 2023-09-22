@@ -3,6 +3,9 @@ import { Suspense, lazy } from "react";
 import { Verify } from "./pages/Verify/Verify";
 import { CheckAuth } from "./utils/Middleware";
 import Spinner from "./components/spinner/Spinner";
+import { BasicInfo } from "./components/basic-info/BasicInfo";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "./redux/user/UserSelector";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -18,6 +21,8 @@ const Error404 = lazy(() => import("./pages/Error404/Error404"));
 const EditProfile = lazy(() => import("./pages/EditProfile/EditProfile"));
 
 function Router() {
+  const user = useSelector(selectCurrentUser);
+
   return (
     <>
       <Suspense fallback={<Spinner />}>
@@ -37,7 +42,9 @@ function Router() {
                 <EditProfile />
               </CheckAuth>
             }
-          ></Route>
+          >
+            <Route index element={<BasicInfo user={user} />} />
+          </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />

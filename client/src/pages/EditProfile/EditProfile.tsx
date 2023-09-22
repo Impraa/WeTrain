@@ -1,14 +1,10 @@
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/user/UserSelector";
-import { BasicInfo } from "../../components/basic-info/BasicInfo";
+import { Outlet } from "react-router-dom";
 
 const EditProfile = () => {
-  const user = useSelector(selectCurrentUser);
-
   return (
-    <div>
-      <BasicInfo user={user} />
-    </div>
+    <>
+      <Outlet />
+    </>
   );
 };
 

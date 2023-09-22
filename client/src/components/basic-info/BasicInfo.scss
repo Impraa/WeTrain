@@ -5,8 +5,15 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0 0 3em 0;
   .first-name,
-  .last-name {
+  .last-name,
+  .email,
+  .birth-date,
+  .gender {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
     label {
       width: 80%;
       font-size: 1.25em;
@@ -28,5 +35,8 @@
         outline: none;
       }
     }
+  }
+  .normal {
+    margin: 2em 0 0 0;
   }
 }
