@@ -127,6 +127,29 @@ router.post("/verify", async (req: Request, res: Response) => {
   }
 });
 
+router.put("/credintals", async (req: Request, res: Response) => {
+  const { fName, lName, email, id } = req.body;
+
+  try {
+    await User.update(
+      { fName: fName, lName: lName, email: email },
+      { where: { id: id } }
+    );
+
+    const user = (await User.findOne({
+      where: { id: id },
+    })) as Model<UserInter>;
+
+    const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
+      expiresIn: "1h",
+    }).toString();
+
+    res.status(200).send(token);
+  } catch (error) {
+    res.status(500).json("Failed to update users credintals");
+  }
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/user-profile-pictures");
