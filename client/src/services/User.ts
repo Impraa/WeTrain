@@ -1,7 +1,11 @@
 import buffer from "buffer";
 global.Buffer = buffer.Buffer;
 import axios, { AxiosResponse } from "axios";
-import { UserLogin, UserRegister } from "../../../types/User";
+import {
+  UserChangeBasicInfo,
+  UserLogin,
+  UserRegister,
+} from "../../../types/User";
 
 export const registerUser = (formData: UserRegister) => {
   return axios
@@ -82,6 +86,23 @@ export const uploadUserProfilePicture = (id: string, file: File) => {
 export const getSingleUser = (id: string) => {
   return axios
     .get(`http://localhost:3000/user/get-user/${id}`)
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};
+
+export const updateUserBasicInfo = (formData: UserChangeBasicInfo) => {
+  return axios
+    .put(`http://localhost:3000/user/basic-info`, formData, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      withCredentials: true,
+    })
     .catch((error) => {
       return {
         statusText: error.response.data,

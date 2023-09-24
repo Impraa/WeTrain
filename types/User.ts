@@ -21,3 +21,10 @@ export interface UserLogin {
   email: string;
   password: string;
 }
+
+export interface UserChangeBasicInfo {
+  email: string;
+  fName: string;
+  lName: string;
+  id: string;
+}

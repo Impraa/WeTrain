@@ -127,7 +127,7 @@ router.post("/verify", async (req: Request, res: Response) => {
   }
 });
 
-router.put("/credintals", async (req: Request, res: Response) => {
+router.put("/basic-info", async (req: Request, res: Response) => {
   const { fName, lName, email, id } = req.body;
 
   try {

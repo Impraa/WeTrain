@@ -1,5 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { User, UserLogin, UserRegister } from "../../../../types/User";
+import {
+  User,
+  UserChangeBasicInfo,
+  UserLogin,
+  UserRegister,
+} from "../../../../types/User";
 import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
 import Jwt from "jsonwebtoken";
@@ -7,6 +12,7 @@ import {
   getSingleUser,
   loginUser,
   registerUser,
+  updateUserBasicInfo,
   uploadUserProfilePicture,
   verifyUser,
 } from "../../services/User";
@@ -115,6 +121,8 @@ export const changeUserProfilePicAsync = async (
   id: string,
   file: File
 ) => {
+  dispatch(setUserStart());
+
   try {
     const userData = await uploadUserProfilePicture(id, file);
 
@@ -124,5 +132,22 @@ export const changeUserProfilePicAsync = async (
     }
   } catch (error) {
     dispatch(setUserFailed("Cannot find user " + error));
+  }
+};
+
+export const updateUserBasicInfoAsync = async (
+  dispatch: Dispatch,
+  formData: UserChangeBasicInfo
+) => {
+  dispatch(setUserStart());
+  try {
+    const userData = await updateUserBasicInfo(formData);
+
+    if (userData.status === 200) {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user));
+    }
+  } catch (error) {
+    dispatch(setUserFailed("Could not update user's basic info " + error));
   }
 };
