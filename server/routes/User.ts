@@ -150,6 +150,39 @@ router.put("/basic-info", async (req: Request, res: Response) => {
   }
 });
 
+router.put("/change-password", async (req: Request, res: Response) => {
+  const { oldPassword, newPassword, id } = req.body;
+
+  try {
+    const user = (await User.findOne({
+      where: { id: id },
+    })) as Model<UserInter>;
+
+    if (bcrypt.compareSync(oldPassword, user.dataValues.password)) {
+      const newHash = bcrypt.hashSync(newPassword, 10);
+
+      await User.update({ password: newHash }, { where: { id: id } });
+
+      const updatedUser = (await User.findOne({
+        where: { id: id },
+      })) as Model<UserInter>;
+
+      const token = Jwt.sign(
+        updatedUser.dataValues,
+        process.env.SECRET || "tajna",
+        {
+          expiresIn: "1h",
+        }
+      ).toString();
+
+      res.status(200).send(token);
+    }
+    res.status(403).send("Passwords are not matching");
+  } catch (error) {
+    res.status(500).json("Failed to update password");
+  }
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/user-profile-pictures");
