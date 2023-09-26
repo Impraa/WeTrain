@@ -183,6 +183,36 @@ router.put("/change-password", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/send-reset-password-link", async (req: Request, res: Response) => {
+  //send email to reset pass
+});
+
+router.put("/reset-password", async (req: Request, res: Response) => {
+  const { newPassword, id } = req.body;
+
+  try {
+    const newHash = bcrypt.hashSync(newPassword, 10);
+
+    await User.update({ password: newHash }, { where: { id: id } });
+
+    const updatedUser = (await User.findOne({
+      where: { id: id },
+    })) as Model<UserInter>;
+
+    const token = Jwt.sign(
+      updatedUser.dataValues,
+      process.env.SECRET || "tajna",
+      {
+        expiresIn: "1h",
+      }
+    ).toString();
+
+    res.status(200).send(token);
+  } catch (error) {
+    res.status(500).json("Failed to update password");
+  }
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/user-profile-pictures");
