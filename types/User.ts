@@ -28,3 +28,9 @@ export interface UserChangeBasicInfo {
   lName: string;
   id: string;
 }
+
+export interface UserChangePassword {
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}

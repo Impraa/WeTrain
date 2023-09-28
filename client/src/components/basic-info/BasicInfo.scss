@@ -40,3 +40,15 @@
     margin: 2em 0 0 0;
   }
 }
+
+@media (min-width: 1024px) {
+  .basic-info {
+    .first-name,
+    .last-name,
+    .email,
+    .birth-date,
+    .gender {
+      width: 30%;
+    }
+  }
+}

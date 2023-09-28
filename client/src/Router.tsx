@@ -6,6 +6,7 @@ import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -44,6 +45,10 @@ function Router() {
             }
           >
             <Route index element={<BasicInfo user={user} />} />
+            <Route
+              path="/edit-profile/change-password"
+              element={<ChangePassword />}
+            />
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
