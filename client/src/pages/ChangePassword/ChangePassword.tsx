@@ -2,12 +2,16 @@ import { useState } from "react";
 import IconEye from "../../assets/IconEye";
 import IconEyeInvisible from "../../assets/IconEyeInvisible";
 import { UserChangePassword } from "../../../../types/User";
+import { updateUserPasswordAsync } from "../../redux/user/UserAction";
+import { useDispatch } from "react-redux";
+import CustomButton from "../../components/custom-button/CustomButton";
 
 const ChangePassword = () => {
   const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
   const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
     useState(false);
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState<UserChangePassword>({
     oldPassword: "",
@@ -21,6 +25,10 @@ const ChangePassword = () => {
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const submitHandler = () => {
+    updateUserPasswordAsync(dispatch, formData);
   };
 
   return (
@@ -94,6 +102,9 @@ const ChangePassword = () => {
           />
         )}
       </div>
+      <CustomButton onClick={submitHandler} type="inverted">
+        Change password
+      </CustomButton>
     </div>
   );
 };

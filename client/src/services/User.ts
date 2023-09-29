@@ -3,6 +3,7 @@ global.Buffer = buffer.Buffer;
 import axios, { AxiosResponse } from "axios";
 import {
   UserChangeBasicInfo,
+  UserChangePassword,
   UserLogin,
   UserRegister,
 } from "../../../types/User";
@@ -98,6 +99,23 @@ export const getSingleUser = (id: string) => {
 export const updateUserBasicInfo = (formData: UserChangeBasicInfo) => {
   return axios
     .put(`http://localhost:3000/user/basic-info`, formData, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      withCredentials: true,
+    })
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};
+
+export const updateUserPassword = (formData: UserChangePassword) => {
+  return axios
+    .put(`http://localhost:3000/user/change-password`, formData, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

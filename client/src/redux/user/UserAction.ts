@@ -2,6 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import {
   User,
   UserChangeBasicInfo,
+  UserChangePassword,
   UserLogin,
   UserRegister,
 } from "../../../../types/User";
@@ -13,6 +14,7 @@ import {
   loginUser,
   registerUser,
   updateUserBasicInfo,
+  updateUserPassword,
   uploadUserProfilePicture,
   verifyUser,
 } from "../../services/User";
@@ -149,5 +151,22 @@ export const updateUserBasicInfoAsync = async (
     }
   } catch (error) {
     dispatch(setUserFailed("Could not update user's basic info " + error));
+  }
+};
+
+export const updateUserPasswordAsync = async (
+  dispatch: Dispatch,
+  formData: UserChangePassword
+) => {
+  dispatch(setUserStart());
+  try {
+    const userData = await updateUserPassword(formData);
+
+    if (userData.status === 200) {
+      const user = Jwt.decode(userData.data) as User;
+      dispatch(setUserSuccess(user));
+    }
+  } catch (error) {
+    dispatch(setUserFailed("Could not update user's password " + error));
   }
 };
