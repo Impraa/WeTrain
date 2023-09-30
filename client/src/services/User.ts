@@ -86,7 +86,9 @@ export const uploadUserProfilePicture = (id: string, file: File) => {
 
 export const getSingleUser = (id: string) => {
   return axios
-    .get(`http://localhost:3000/user/get-user/${id}`)
+    .get(`http://localhost:3000/user/get-user/${id}`, {
+      headers: { "Content-Type": "image/jpeg" },
+    })
     .catch((error) => {
       return {
         statusText: error.response.data,

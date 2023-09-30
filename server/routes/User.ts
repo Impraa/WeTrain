@@ -274,17 +274,17 @@ const resizeImage = (req: Request, res: Response, next: NextFunction) => {
 
 router.post(
   "/upload-profile-pic",
-  upload,
   resizeImage,
+  upload,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.body;
 
+      await User.update({ image: req.file!.path }, { where: { id: id } });
+
       const user = (await User.findOne({
         where: { id: id },
       })) as Model<UserInter>;
-
-      user.dataValues.image = req.file!.path;
 
       const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
         expiresIn: "1h",

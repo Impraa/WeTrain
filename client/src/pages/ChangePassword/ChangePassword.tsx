@@ -6,6 +6,8 @@ import { updateUserPasswordAsync } from "../../redux/user/UserAction";
 import { useDispatch } from "react-redux";
 import CustomButton from "../../components/custom-button/CustomButton";
 
+import "./ChangePassword.scss";
+
 const ChangePassword = () => {
   const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
@@ -35,72 +37,78 @@ const ChangePassword = () => {
     <div className="change-password">
       <div className="old-password">
         <label htmlFor="oldPassword">Old Password</label>
-        <input
-          id="oldPassword"
-          name="oldPassword"
-          onChange={changeHandler}
-          value={formData.oldPassword}
-          type={isOldPasswordVisible ? "text" : "password"}
-        />
-        {isOldPasswordVisible ? (
-          <IconEye
-            onClick={() => {
-              setIsOldPasswordVisible(false);
-            }}
+        <div className="old-password-input">
+          <input
+            id="oldPassword"
+            name="oldPassword"
+            onChange={changeHandler}
+            value={formData.oldPassword}
+            type={isOldPasswordVisible ? "text" : "password"}
           />
-        ) : (
-          <IconEyeInvisible
-            onClick={() => {
-              setIsOldPasswordVisible(true);
-            }}
-          />
-        )}
+          {isOldPasswordVisible ? (
+            <IconEye
+              onClick={() => {
+                setIsOldPasswordVisible(false);
+              }}
+            />
+          ) : (
+            <IconEyeInvisible
+              onClick={() => {
+                setIsOldPasswordVisible(true);
+              }}
+            />
+          )}
+        </div>
       </div>
       <div className="new-password">
         <label htmlFor="newPassword">New password</label>
-        <input
-          id="newPassword"
-          name="newPassword"
-          value={formData.newPassword}
-          onChange={changeHandler}
-          type={isNewPasswordVisible ? "text" : "password"}
-        />
-        {isNewPasswordVisible ? (
-          <IconEye
-            onClick={() => {
-              setIsNewPasswordVisible(false);
-            }}
+        <div className="new-password-input">
+          <input
+            id="newPassword"
+            name="newPassword"
+            value={formData.newPassword}
+            onChange={changeHandler}
+            type={isNewPasswordVisible ? "text" : "password"}
           />
-        ) : (
-          <IconEyeInvisible
-            onClick={() => {
-              setIsNewPasswordVisible(true);
-            }}
-          />
-        )}
+          {isNewPasswordVisible ? (
+            <IconEye
+              onClick={() => {
+                setIsNewPasswordVisible(false);
+              }}
+            />
+          ) : (
+            <IconEyeInvisible
+              onClick={() => {
+                setIsNewPasswordVisible(true);
+              }}
+            />
+          )}
+        </div>
       </div>
       <div className="confirm-new-password">
         <label htmlFor="confirmNewPassword">Confirm New password</label>
-        <input
-          id="confirmNewPassword"
-          name="confirmNewPassword"
-          onChange={changeHandler}
-          value={formData.confirmNewPassword}
-          type={isConfirmNewPasswordVisible ? "text" : "password"}
-        />
-        {isConfirmNewPasswordVisible ? (
-          <IconEye
-            onClick={() => {
-              setIsConfirmNewPasswordVisible(false);
-            }}
+        <div className="confirm-new-password-input">
+          <input
+            id="confirmNewPassword"
+            name="confirmNewPassword"
+            onChange={changeHandler}
+            value={formData.confirmNewPassword}
+            type={isConfirmNewPasswordVisible ? "text" : "password"}
           />
-        ) : (
-          <IconEyeInvisible
-            onClick={() => {
-              setIsConfirmNewPasswordVisible(true);
-            }}
-          />
-        )}
+          {isConfirmNewPasswordVisible ? (
+            <IconEye
+              onClick={() => {
+                setIsConfirmNewPasswordVisible(false);
+              }}
+            />
+          ) : (
+            <IconEyeInvisible
+              onClick={() => {
+                setIsConfirmNewPasswordVisible(true);
+              }}
+            />
+          )}
+        </div>
       </div>
       <CustomButton onClick={submitHandler} type="inverted">
         Change password
