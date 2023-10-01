@@ -61,7 +61,7 @@ function Navbar() {
       <div className="nav-links">
         {NavItems.map((item) => {
           return (
-            <NavItem key={item.text} path={item.path}>
+            <NavItem onClick={() => {}} key={item.text} path={item.path}>
               {item.text}
             </NavItem>
           );
@@ -75,7 +75,7 @@ function Navbar() {
         ) : (
           AuthItems.map((item) => {
             return (
-              <NavItem key={item.text} path={item.path}>
+              <NavItem onClick={() => {}} key={item.text} path={item.path}>
                 {item.text}
               </NavItem>
             );

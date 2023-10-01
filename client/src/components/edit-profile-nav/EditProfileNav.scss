@@ -1,0 +1,10 @@
+@import "../../utils/variables";
+
+.edit-profile-nav {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .nav-item {
+    color: $secondaryColor;
+  }
+}

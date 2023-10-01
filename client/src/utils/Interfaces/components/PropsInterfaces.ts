@@ -4,6 +4,7 @@ import { User } from "../../../../../types/User";
 export interface NavItemProps {
   path: string;
   children: ReactNode;
+  onClick: () => void;
 }
 
 export interface CustomButton {
