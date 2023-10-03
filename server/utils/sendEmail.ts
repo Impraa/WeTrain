@@ -98,7 +98,7 @@ export const sendChangePass = async function (email: String) {
           </h2>
           <h3 style="display: block">
             Here press the button down below to reset your password, if request was
-            not made by you ignore this mail
+            not made by you ignore this mail!
           </h3>
           <a
             href="${

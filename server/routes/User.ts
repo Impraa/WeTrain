@@ -12,7 +12,7 @@ import User from "../models/user";
 import { Model } from "sequelize";
 import Jwt from "jsonwebtoken";
 import { User as UserInter } from "../../types/User";
-import { sendVerifyLink } from "../utils/sendEmail";
+import { sendChangePass, sendVerifyLink } from "../utils/sendEmail";
 import path from "path";
 import sharp from "sharp";
 import fs from "fs";
@@ -185,6 +185,18 @@ router.put("/change-password", async (req: Request, res: Response) => {
 
 router.get("/send-reset-password-link", async (req: Request, res: Response) => {
   //send email to reset pass
+
+  const { email } = req.body;
+
+  try {
+    sendChangePass(email);
+
+    return res.status(200).send("Email was successfully sent.");
+  } catch (error) {
+    return res
+      .status(500)
+      .send("We encountered an error did you provide an email?");
+  }
 });
 
 router.put("/reset-password", async (req: Request, res: Response) => {
