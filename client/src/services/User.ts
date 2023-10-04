@@ -131,3 +131,24 @@ export const updateUserPassword = (formData: UserChangePassword) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const sendUserChangePassword = (email: string) => {
+  return axios
+    .post(
+      `http://localhost:3000/user/send-reset-password-link`,
+      { email: email },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        withCredentials: true,
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

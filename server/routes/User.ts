@@ -183,21 +183,24 @@ router.put("/change-password", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/send-reset-password-link", async (req: Request, res: Response) => {
-  //send email to reset pass
+router.post(
+  "/send-reset-password-link",
+  async (req: Request, res: Response) => {
+    //send email to reset pass
 
-  const { email } = req.body;
+    const { email } = req.body;
 
-  try {
-    sendChangePass(email);
+    try {
+      sendChangePass(email);
 
-    return res.status(200).send("Email was successfully sent.");
-  } catch (error) {
-    return res
-      .status(500)
-      .send("We encountered an error did you provide an email?");
+      return res.status(200).send("Email was successfully sent.");
+    } catch (error) {
+      return res
+        .status(500)
+        .send("We encountered an error did you provide an email?");
+    }
   }
-});
+);
 
 router.put("/reset-password", async (req: Request, res: Response) => {
   const { newPassword, id } = req.body;
