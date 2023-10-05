@@ -1,6 +1,11 @@
+import { useState } from "react";
 import CustomButton from "../../components/custom-button/CustomButton";
 import "./ForgotPassword.scss";
 function ForgotPassword() {
+  const [email, setEmail] = useState<string>("");
+
+  const submitEmail = () => {};
+
   return (
     <div className="forgot-password">
       <div className="content">
@@ -11,9 +16,22 @@ function ForgotPassword() {
         </h3>
         <div className="email">
           <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.currentTarget.value);
+            }}
+          />
         </div>
-        <CustomButton type="success" onClick={() => {}}>
+        <CustomButton
+          type="success"
+          onClick={() => {
+            submitEmail();
+          }}
+        >
           Send me a reset link
         </CustomButton>
       </div>
