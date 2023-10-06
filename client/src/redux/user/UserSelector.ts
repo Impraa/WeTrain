@@ -13,3 +13,9 @@ export const selectFoundUserIsLoading = (state: RootState) =>
 
 export const selectFoundUserError = (state: RootState) =>
   state.user!.foundUserError;
+
+export const selectNewPasswordIsLoading = (state: RootState) =>
+  state.user!.newPasswordIsLoading;
+
+export const selectNewPasswordError = (state: RootState) =>
+  state.user!.newPasswordError;

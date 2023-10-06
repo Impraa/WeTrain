@@ -132,7 +132,7 @@ export const updateUserPassword = (formData: UserChangePassword) => {
     });
 };
 
-export const sendUserChangePassword = (email: string) => {
+export const sendUserResetPassword = (email: string) => {
   return axios
     .post(
       `http://localhost:3000/user/send-reset-password-link`,

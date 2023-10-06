@@ -7,15 +7,21 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { userReducer } from "./user/UserReducer";
 
-export const rootReducer = combineReducers({
-  user: userReducer,
-});
-
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["user"],
+};
+
+const userPersistConfig = {
+  key: "user",
+  storage,
   blacklist: ["isLoading", "error", "foundUserIsLoading", "foundUserError"],
 };
+
+export const rootReducer = combineReducers({
+  user: persistReducer(userPersistConfig, userReducer),
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -8,6 +8,8 @@ const INITAL_STATE = {
   foundUser: null,
   foundUserIsLoading: false,
   foundUserError: null,
+  newPasswordIsLoading: false,
+  newPasswordError: null,
 };
 
 export const userReducer = (state = INITAL_STATE, action: AnyAction) => {
@@ -50,6 +52,22 @@ export const userReducer = (state = INITAL_STATE, action: AnyAction) => {
       return {
         ...state,
         selectFoundUserError: payload,
+      };
+    case UserActionType.START_CHANGE_PASSWORD:
+      return {
+        ...state,
+        newPasswordIsLoading: true,
+      };
+    case UserActionType.ERROR_CHANGE_PASSWORD:
+      return {
+        ...state,
+        newPasswordError: payload,
+        newPasswordIsLoading: false,
+      };
+    case UserActionType.SUCCESS_CHANGE_PASSWORD:
+      return {
+        ...state,
+        newPasswordIsLoading: false,
       };
     default:
       return state;

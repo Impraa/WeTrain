@@ -61,7 +61,7 @@ export const sendVerifyLink = async function (user: User, email: String) {
   });
 };
 
-export const sendChangePass = async function (email: String) {
+export const sendChangePass = async function (user: User) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -73,7 +73,7 @@ export const sendChangePass = async function (email: String) {
 
   await transporter.sendMail({
     from: '"We Train" <biznisimpra@gmail.com>',
-    to: `${email}`,
+    to: `${user.email}`,
     subject: "Verification Email",
     html: `<!DOCTYPE html>
     <html lang="en">
@@ -103,7 +103,7 @@ export const sendChangePass = async function (email: String) {
           <a
             href="${
               process.env.CILENT_URL ||
-              `http://127.0.0.1:5173/change-password/${email}`
+              `http://127.0.0.1:5173/reset-password/${user.id}`
             }"
             class="normal"
             style="

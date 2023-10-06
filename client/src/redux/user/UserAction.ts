@@ -13,6 +13,7 @@ import {
   getSingleUser,
   loginUser,
   registerUser,
+  sendUserResetPassword,
   updateUserBasicInfo,
   updateUserPassword,
   uploadUserProfilePicture,
@@ -45,6 +46,18 @@ export const setFoundUserSuccess = (user: User | null) => {
 
 export const logoutUser = (user: User) => {
   return createAction(UserActionType.LOGOUT_USER, user);
+};
+
+export const startResetPassword = () => {
+  return createAction(UserActionType.START_CHANGE_PASSWORD);
+};
+
+export const successResetPassword = () => {
+  return createAction(UserActionType.SUCCESS_CHANGE_PASSWORD);
+};
+
+export const errorResetPassword = (error: string) => {
+  return createAction(UserActionType.ERROR_CHANGE_PASSWORD, error);
 };
 
 export const registerUserAsync = async (
@@ -168,5 +181,23 @@ export const updateUserPasswordAsync = async (
     }
   } catch (error) {
     dispatch(setUserFailed("Could not update user's password " + error));
+  }
+};
+
+export const resetUserPasswordAsync = async (
+  dispatch: Dispatch,
+  email: string
+) => {
+  dispatch(startResetPassword());
+
+  try {
+    const response = await sendUserResetPassword(email);
+
+    if (response.status === 200) {
+      dispatch(successResetPassword());
+      return "/" as string;
+    }
+  } catch (error) {
+    dispatch(errorResetPassword("Unable to reset password " + error));
   }
 };

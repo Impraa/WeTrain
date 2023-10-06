@@ -7,6 +7,7 @@ import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import { User } from "../../types/User";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -20,6 +21,7 @@ const EmailSent = lazy(() => import("./pages/Email-Sent/EmailSent"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const Error404 = lazy(() => import("./pages/Error404/Error404"));
 const EditProfile = lazy(() => import("./pages/EditProfile/EditProfile"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword/ResetPassword"));
 
 function Router() {
   const user = useSelector(selectCurrentUser);
@@ -34,6 +36,7 @@ function Router() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/email-sent" element={<EmailSent />} />
+          <Route path="/reset-password/:id" element={<ResetPassword />} />
           <Route path="/verify/:id" element={<Verify />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route
@@ -44,7 +47,10 @@ function Router() {
               </CheckAuth>
             }
           >
-            <Route index element={<BasicInfo user={user} />} />
+            <Route
+              index
+              element={<BasicInfo user={user as unknown as User} />}
+            />
             <Route
               path="/edit-profile/change-password"
               element={<ChangePassword />}

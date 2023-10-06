@@ -191,7 +191,11 @@ router.post(
     const { email } = req.body;
 
     try {
-      sendChangePass(email);
+      const user = (await User.findOne({
+        where: { email: email },
+      })) as Model<UserInter>;
+
+      sendChangePass(user.dataValues);
 
       return res.status(200).send("Email was successfully sent.");
     } catch (error) {

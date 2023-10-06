@@ -29,17 +29,11 @@ function LoginForm() {
   const isLoading = useSelector(selectUserIsLoading);
   const serverError = useSelector(selectUserError);
 
-  const [error, setError] = useState<string>("");
-
   useEffect(() => {
     if (user) {
       navigate(state?.path || "/");
     }
   }, [user]);
-
-  useEffect(() => {
-    setError(serverError);
-  }, [serverError]);
 
   const handleChange = (
     e:
@@ -63,7 +57,7 @@ function LoginForm() {
 
   return (
     <div className="login-form">
-      {error && <Message type="error">{error}</Message>}
+      {serverError && <Message type="error">{serverError}</Message>}
       <div className="email">
         <label htmlFor="email">Email</label>
         <input
