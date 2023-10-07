@@ -1,7 +1,10 @@
-.spinner {
+.spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7.5em;
-  height: 5em;
+  height: 100vh;
+  .spinner {
+    width: 7.5em;
+    height: 5em;
+  }
 }

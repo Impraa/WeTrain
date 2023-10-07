@@ -175,11 +175,12 @@ router.put("/change-password", async (req: Request, res: Response) => {
         }
       ).toString();
 
-      res.status(200).send(token);
+      return res.status(200).send(token);
     }
-    res.status(403).send("Passwords are not matching");
+    return res.status(403).send("Passwords are not matching");
   } catch (error) {
-    res.status(500).json("Failed to update password");
+    console.log(error);
+    return res.status(500).json("Failed to update password");
   }
 });
 

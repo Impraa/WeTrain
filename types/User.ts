@@ -29,8 +29,12 @@ export interface UserChangeBasicInfo {
   id: string;
 }
 
-export interface UserChangePassword {
-  oldPassword: string;
+export interface UserResetPassword {
   newPassword: string;
   confirmNewPassword: string;
+}
+
+export interface UserChangePassword extends UserResetPassword {
+  id: string;
+  oldPassword: string;
 }

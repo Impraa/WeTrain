@@ -13,6 +13,7 @@ import {
   getSingleUser,
   loginUser,
   registerUser,
+  resetUserPassword,
   sendUserResetPassword,
   updateUserBasicInfo,
   updateUserPassword,
@@ -184,7 +185,7 @@ export const updateUserPasswordAsync = async (
   }
 };
 
-export const resetUserPasswordAsync = async (
+export const sendResetUserPasswordAsync = async (
   dispatch: Dispatch,
   email: string
 ) => {
@@ -198,6 +199,30 @@ export const resetUserPasswordAsync = async (
       return "/" as string;
     }
   } catch (error) {
-    dispatch(errorResetPassword("Unable to reset password " + error));
+    dispatch(
+      errorResetPassword(
+        "Unable to send notification for password reset" + error
+      )
+    );
+  }
+};
+
+export const resetUserPasswordAsync = async (
+  dispatch: Dispatch,
+  newPassword: string,
+  id: number
+) => {
+  dispatch(setUserStart());
+
+  try {
+    const response = await resetUserPassword(newPassword, id);
+
+    if (response.status === 200) {
+      const user = Jwt.decode(response.data) as User;
+      dispatch(setUserSuccess(user));
+      return "/" as string;
+    }
+  } catch (error) {
+    dispatch(setUserFailed("Unable to reset password" + error));
   }
 };

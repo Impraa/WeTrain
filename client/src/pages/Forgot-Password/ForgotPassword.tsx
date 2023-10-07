@@ -7,7 +7,7 @@ import {
   selectNewPasswordError,
   selectNewPasswordIsLoading,
 } from "../../redux/user/UserSelector";
-import { resetUserPasswordAsync } from "../../redux/user/UserAction";
+import { sendResetUserPasswordAsync } from "../../redux/user/UserAction";
 import { useNavigate } from "react-router-dom";
 function ForgotPassword() {
   const [email, setEmail] = useState<string>("");
@@ -18,7 +18,7 @@ function ForgotPassword() {
   const newPasswordError = useSelector(selectNewPasswordError);
 
   const submitEmail = () => {
-    const homepage = resetUserPasswordAsync(dispatch, email);
+    const homepage = sendResetUserPasswordAsync(dispatch, email);
     homepage.then((response) => navigate(response!));
   };
 
@@ -44,7 +44,7 @@ function ForgotPassword() {
           />
         </div>
         <CustomButton
-          type="success"
+          type="normal"
           onClick={() => {
             submitEmail();
           }}

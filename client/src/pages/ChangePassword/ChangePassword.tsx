@@ -1,12 +1,13 @@
 import { useState } from "react";
 import IconEye from "../../assets/IconEye";
 import IconEyeInvisible from "../../assets/IconEyeInvisible";
-import { UserChangePassword } from "../../../../types/User";
+import { User, UserChangePassword } from "../../../../types/User";
 import { updateUserPasswordAsync } from "../../redux/user/UserAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "../../components/custom-button/CustomButton";
 
 import "./ChangePassword.scss";
+import { selectCurrentUser } from "../../redux/user/UserSelector";
 
 const ChangePassword = () => {
   const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
@@ -14,8 +15,10 @@ const ChangePassword = () => {
   const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
     useState(false);
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser) as unknown as User;
 
   const [formData, setFormData] = useState<UserChangePassword>({
+    id: user.id,
     oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
