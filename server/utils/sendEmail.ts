@@ -74,7 +74,7 @@ export const sendChangePass = async function (user: User) {
   await transporter.sendMail({
     from: '"We Train" <biznisimpra@gmail.com>',
     to: `${user.email}`,
-    subject: "Verification Email",
+    subject: "Password reset",
     html: `<!DOCTYPE html>
     <html lang="en">
       <head>
