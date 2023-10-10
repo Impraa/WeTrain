@@ -6,8 +6,6 @@ import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
-import { User } from "../../types/User";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -22,6 +20,16 @@ const Profile = lazy(() => import("./pages/Profile/Profile"));
 const Error404 = lazy(() => import("./pages/Error404/Error404"));
 const EditProfile = lazy(() => import("./pages/EditProfile/EditProfile"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword/ResetPassword"));
+const ChangePassword = lazy(
+  () => import("./pages/ChangePassword/ChangePassword")
+);
+const Notifications = lazy(() => import("./pages/Notifications/Notifications"));
+const SeeNotifications = lazy(
+  () => import("./pages/See-Notifications/SeeNotifications")
+);
+const CreateNotification = lazy(
+  () => import("./pages/Create-Notificaton/CreateNotification")
+);
 
 function Router() {
   const user = useSelector(selectCurrentUser);
@@ -47,13 +55,17 @@ function Router() {
               </CheckAuth>
             }
           >
-            <Route
-              index
-              element={<BasicInfo user={user as unknown as User} />}
-            />
+            <Route index element={<BasicInfo user={user!} />} />
             <Route
               path="/edit-profile/change-password"
               element={<ChangePassword />}
+            />
+          </Route>
+          <Route path="/notifications" element={<Notifications />}>
+            <Route index element={<SeeNotifications />} />
+            <Route
+              path="/notifications/create"
+              element={<CreateNotification />}
             />
           </Route>
           <Route path="*" element={<Error404 />} />

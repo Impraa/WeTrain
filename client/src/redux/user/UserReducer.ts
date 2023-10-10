@@ -1,7 +1,17 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { UserActionType } from "./UserTypes";
+import { User } from "../../../../types/User";
 
-const INITAL_STATE = {
+const INITAL_STATE: {
+  user: User | null;
+  isLoading: boolean;
+  error: string | null;
+  foundUser: User | null;
+  foundUserIsLoading: boolean;
+  foundUserError: string | null;
+  newPasswordIsLoading: boolean;
+  newPasswordError: string | null;
+} = {
   user: null,
   isLoading: false,
   error: null,

@@ -14,10 +14,18 @@ export const UserBoxNav: React.FC<UserNavBox> = ({ user }) => {
 
   return (
     <>
-      {" "}
+      {user.role === "admin" ? (
+        <NavItem onClick={() => {}} path={"/notifications/create"}>
+          Create notification
+        </NavItem>
+      ) : (
+        ""
+      )}
       <div className="user-info">
         <p>Hello,</p>{" "}
-        <NavItem path={`/profile/${user.id}`}>{user.username}</NavItem>{" "}
+        <NavItem onClick={() => {}} path={`/profile/${user.id}`}>
+          {user.username}
+        </NavItem>{" "}
       </div>
       <CustomButton onClick={logoutHandler} type="nav-button">
         Logout

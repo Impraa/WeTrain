@@ -11,10 +11,11 @@ import {
 } from "../../redux/user/UserAction";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { User } from "../../../../types/User";
 
 const Profile = () => {
-  const user = useSelector(selectCurrentUser);
-  const foundUser = useSelector(selectFoundUser);
+  const user = useSelector(selectCurrentUser) as unknown as User;
+  const foundUser = useSelector(selectFoundUser) as unknown as User;
 
   const { id } = useParams();
   const dispatch = useDispatch();

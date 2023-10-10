@@ -12,6 +12,10 @@ const NavItems = [
     path: "/",
     text: "Home",
   },
+  {
+    path: "/notifications",
+    text: "Notifications",
+  },
 ];
 
 const AuthItems = [
