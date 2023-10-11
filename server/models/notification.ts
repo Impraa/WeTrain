@@ -15,6 +15,7 @@ const Notification = sequelize.define("notifications", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  image: { type: DataTypes.STRING, allowNull: true },
 });
 
 export default Notification;

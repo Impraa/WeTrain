@@ -22,6 +22,10 @@ app.use(
   "/public/user-profile-pictures",
   express.static("./public/user-profile-pictures")
 );
+app.use(
+  "/public/notification-banner",
+  express.static("./public/notification-banner")
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "10mb" }));
 
