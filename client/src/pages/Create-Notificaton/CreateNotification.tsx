@@ -1,9 +1,11 @@
 import { memo, useState } from "react";
 import "./CreateNotification.scss";
-import { CreateNotification } from "../../../../types/Notification";
+import { CreateNotification as NotificationInter } from "../../../../types/Notification";
+import IconHardDriveUpload from "../../assets/IconHardDriveUpload";
+import CustomButton from "../../components/custom-button/CustomButton";
 
 const CreateNotification = memo(function MyFunction() {
-  const [formData, setFormData] = useState<CreateNotification>({
+  const [formData, setFormData] = useState<NotificationInter>({
     title: "",
     text: "",
     image: null,
@@ -46,15 +48,22 @@ const CreateNotification = memo(function MyFunction() {
           name="text"
         />
       </div>
-      <div className="image">
-        <label htmlFor="image">Image</label>
-        <input
-          type="file"
-          onChange={updateProfilePicture}
-          id="image"
-          name="image"
-        />
+      <div>
+        <label htmlFor="image" className="image">
+          <IconHardDriveUpload />
+          <h2>Here you can upload your image</h2>
+          <input
+            type="file"
+            onChange={updateProfilePicture}
+            id="image"
+            name="image"
+            hidden
+          />
+        </label>
       </div>
+      <CustomButton onClick={() => {}} type="normal">
+        Create new notification
+      </CustomButton>
     </div>
   );
 });
