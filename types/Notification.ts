@@ -1,7 +1,6 @@
 export interface CreateNotification {
   title: string;
   text: string;
-  image: File | null;
 }
 
 export interface Notification {

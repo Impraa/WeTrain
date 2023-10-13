@@ -6,11 +6,12 @@ import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { userReducer } from "./user/UserReducer";
+import { notificationReducer } from "./notification/NotificationReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user"],
+  blacklist: ["user", "notification"],
 };
 
 const userPersistConfig = {
@@ -19,8 +20,20 @@ const userPersistConfig = {
   blacklist: ["isLoading", "error", "foundUserIsLoading", "foundUserError"],
 };
 
+const notificationPersistConfig = {
+  key: "notification",
+  storage,
+  blacklist: [
+    "isLoading",
+    "error",
+    "notificationsError",
+    "notificationsIsLoading",
+  ],
+};
+
 export const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
+  notification: persistReducer(notificationPersistConfig, notificationReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

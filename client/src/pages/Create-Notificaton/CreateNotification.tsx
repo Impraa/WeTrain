@@ -3,26 +3,35 @@ import "./CreateNotification.scss";
 import { CreateNotification as NotificationInter } from "../../../../types/Notification";
 import IconHardDriveUpload from "../../assets/IconHardDriveUpload";
 import CustomButton from "../../components/custom-button/CustomButton";
+import { createNotificationAsync } from "../../redux/notification/NotificationAction";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/user/UserSelector";
 
 const CreateNotification = memo(function MyFunction() {
+  const user = useSelector(selectCurrentUser)!;
+
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState<NotificationInter>({
     title: "",
     text: "",
-    image: null,
   });
+  const [image, setImage] = useState<File>();
+
+  const handleSubmit = () => {
+    createNotificationAsync(dispatch, formData, user, image!);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const updateProfilePicture = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const updateProfilePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFile = e.target.files[0];
 
-      setFormData((prevFormData) => ({ ...prevFormData, image: selectedFile }));
+      setImage(selectedFile);
     }
   };
 
@@ -61,7 +70,7 @@ const CreateNotification = memo(function MyFunction() {
           />
         </label>
       </div>
-      <CustomButton onClick={() => {}} type="normal">
+      <CustomButton onClick={handleSubmit} type="normal">
         Create new notification
       </CustomButton>
     </div>

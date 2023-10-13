@@ -34,6 +34,7 @@ const upload = multer({
 }).single("image");
 
 const resizeImage = (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.file);
   if (!req.file) {
     // No file uploaded, move to the next middleware
     return next();
@@ -70,36 +71,39 @@ const resizeImage = (req: Request, res: Response, next: NextFunction) => {
 };
 
 router.post(
-  "/create-notifictaion",
-  isUserAdmin,
+  "/create",
   resizeImage,
   upload,
+  isUserAdmin,
   async (req: Request, res: Response) => {
     //create a post
-    const { text, title, image } = req.body;
+    const { text, title } = req.body.formData;
 
     try {
-      await Notification.create({ title, text, image });
-
+      if (req.file) {
+        await Notification.create({ title, text, image: req.file.path });
+      } else {
+        await Notification.create({ title, text });
+      }
       return res.status(201).send("Notification was created");
     } catch (error) {
-      return res.status(500).send("Could not create notification");
+      return res.status(500).send("Could not be create notification");
     }
   }
 );
 
-router.get("/get-all-notifications", async (req: Request, res: Response) => {
+router.get("/get-all", async (req: Request, res: Response) => {
   try {
     const allNotifications =
       (await Notification.findAll()) as unknown as Model<NotificationInter>;
 
     return res.status(201).send(allNotifications.dataValues);
   } catch (error) {
-    return res.status(500).send("Could find any notification");
+    return res.status(500).send("Could find any notifications");
   }
 });
 
-router.get("/get-all-notifications", async (req: Request, res: Response) => {
+router.get("/get-one", async (req: Request, res: Response) => {
   const { id } = req.body;
 
   try {
