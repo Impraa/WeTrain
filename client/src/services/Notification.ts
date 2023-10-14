@@ -26,3 +26,20 @@ export const createNotification = (
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const getAllNotifications = () => {
+  return axios
+    .get("http://localhost:3000/notification/get-all", {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    })
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

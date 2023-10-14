@@ -94,16 +94,19 @@ router.post(
 
 router.get("/get-all", async (req: Request, res: Response) => {
   try {
-    const allNotifications =
-      (await Notification.findAll()) as unknown as Model<NotificationInter>;
+    const allNotifications = await Notification.findAll();
 
-    return res.status(201).send(allNotifications.dataValues);
+    const notificationsDataValues = allNotifications.map(
+      (notification) => notification.dataValues
+    );
+
+    return res.status(201).send(notificationsDataValues);
   } catch (error) {
     return res.status(500).send("Could find any notifications");
   }
 });
 
-router.get("/get-one", async (req: Request, res: Response) => {
+router.get("/get-one/:id", async (req: Request, res: Response) => {
   const { id } = req.body;
 
   try {

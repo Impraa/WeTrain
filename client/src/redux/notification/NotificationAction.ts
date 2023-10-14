@@ -5,7 +5,10 @@ import {
 } from "../../../../types/Notification";
 import { createAction } from "../GenericAction";
 import { NotificationActionType } from "./NotificationTypes";
-import { createNotification } from "../../services/Notification";
+import {
+  createNotification,
+  getAllNotifications,
+} from "../../services/Notification";
 import { User } from "../../../../types/User";
 
 export const startSetNotification = () => {
@@ -49,13 +52,33 @@ export const createNotificationAsync = async (
     const notification = await createNotification(formData, user, image);
 
     if (notification.data) {
-      dispatch(successSetNotification(notification.data));
+      return dispatch(successSetNotification(notification.data));
     }
 
     dispatch(errorSetNotificaton("Could not create notification"));
   } catch (error) {
     dispatch(
       errorSetNotificaton(("Could not create notification " + error) as string)
+    );
+  }
+};
+
+export const getAllNotificationsAsync = async (dispatch: Dispatch) => {
+  dispatch(startSetNotifications());
+  try {
+    const notifications = await getAllNotifications();
+    console.log(notifications.data);
+
+    if (notifications.data) {
+      return dispatch(successSetNotifications(notifications.data));
+    }
+
+    dispatch(errorSetNotificatons("Could not recive notifications"));
+  } catch (error) {
+    dispatch(
+      errorSetNotificatons(
+        ("Could not recive notifications " + error) as string
+      )
     );
   }
 };

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { User } from "../../../../../types/User";
+import { Notification } from "../../../../../types/Notification";
 
 export interface NavItemProps {
   path: string;
@@ -28,4 +29,8 @@ export interface CheckAuth {
 
 export interface BasicInfo {
   user: User;
+}
+
+export interface Notifcation {
+  notification: Notification;
 }

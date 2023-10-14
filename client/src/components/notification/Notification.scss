@@ -1,0 +1,42 @@
+@import "../../utils/variables";
+.notification:first-child {
+  margin: 2em 0.5em;
+}
+.notification {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  border: 0.1em solid $secondaryColor;
+  margin: 3.5em 0.5em;
+  border-radius: 2%;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  padding: 0.5em 0.25em;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  .image {
+    justify-self: center;
+    svg,
+    img {
+      width: 7.5em;
+      height: 5em;
+      filter: grayscale(50%);
+      transition: 0.25s all ease-in-out;
+    }
+  }
+  h2 {
+    justify-self: center;
+    transition: 0.25s all ease-in-out;
+  }
+  &:hover {
+    .image {
+      img,
+      svg {
+        filter: grayscale(0%);
+      }
+    }
+    .text {
+      transform: scale(1.25);
+    }
+  }
+}

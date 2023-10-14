@@ -23,10 +23,10 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword/ResetPassword"));
 const ChangePassword = lazy(
   () => import("./pages/ChangePassword/ChangePassword")
 );
-const Notifications = lazy(() => import("./pages/Notifications/Notifications"));
-const SeeNotifications = lazy(
-  () => import("./pages/See-Notifications/SeeNotifications")
+const NotificationsOutlet = lazy(
+  () => import("./pages/Notifications-Outlet/NotificationsOutlet")
 );
+const Notifications = lazy(() => import("./pages/Notifications/Notifications"));
 const CreateNotification = lazy(
   () => import("./pages/Create-Notificaton/CreateNotification")
 );
@@ -61,8 +61,8 @@ function Router() {
               element={<ChangePassword />}
             />
           </Route>
-          <Route path="/notifications" element={<Notifications />}>
-            <Route index element={<SeeNotifications />} />
+          <Route path="/notifications" element={<NotificationsOutlet />}>
+            <Route index element={<Notifications />} />
             <Route
               path="/notifications/create"
               element={<CreateNotification />}
