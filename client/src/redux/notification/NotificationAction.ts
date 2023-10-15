@@ -8,6 +8,7 @@ import { NotificationActionType } from "./NotificationTypes";
 import {
   createNotification,
   getAllNotifications,
+  getSingleNotification,
 } from "../../services/Notification";
 import { User } from "../../../../types/User";
 
@@ -67,7 +68,6 @@ export const getAllNotificationsAsync = async (dispatch: Dispatch) => {
   dispatch(startSetNotifications());
   try {
     const notifications = await getAllNotifications();
-    console.log(notifications.data);
 
     if (notifications.data) {
       return dispatch(successSetNotifications(notifications.data));
@@ -78,6 +78,33 @@ export const getAllNotificationsAsync = async (dispatch: Dispatch) => {
     dispatch(
       errorSetNotificatons(
         ("Could not recive notifications " + error) as string
+      )
+    );
+  }
+};
+
+export const getSingleNotificationAsync = async (
+  dispatch: Dispatch,
+  id: string
+) => {
+  dispatch(startSetNotification());
+  try {
+    const notifcation = await getSingleNotification(id);
+
+    console.log(notifcation.data);
+    if (notifcation.data) {
+      return dispatch(successSetNotification(notifcation.data));
+    }
+
+    return dispatch(
+      errorSetNotificaton(
+        "Could not recive notification you are currently looking for, please try again"
+      )
+    );
+  } catch (error) {
+    dispatch(
+      errorSetNotificaton(
+        "Could not recive notification you are currently looking for, please try again or check for it's existance."
       )
     );
   }

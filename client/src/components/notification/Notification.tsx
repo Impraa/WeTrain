@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Notification: React.FC<Notifcation> = ({ notification }) => {
   return (
-    <Link to="/" className="notification">
+    <Link to={`/notifications/${notification.id}`} className="notification">
       <div className="image">
         {notification.image ? (
           <img src={`http://localhost:3000/${notification.image}`} />

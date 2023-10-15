@@ -22,9 +22,8 @@ export const UserBoxNav: React.FC<UserNavBox> = ({ user }) => {
         ""
       )}
       <div className="user-info">
-        <p>Hello,</p>{" "}
         <NavItem onClick={() => {}} path={`/profile/${user.id}`}>
-          {user.username}
+          Profile
         </NavItem>{" "}
       </div>
       <CustomButton onClick={logoutHandler} type="nav-button">

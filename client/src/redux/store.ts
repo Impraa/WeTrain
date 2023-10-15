@@ -23,7 +23,7 @@ const userPersistConfig = {
 const notificationPersistConfig = {
   key: "notification",
   storage,
-  whitelist: ["notifications", "notification"],
+  whitelist: ["notifications"],
 };
 
 export const rootReducer = combineReducers({

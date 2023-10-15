@@ -107,8 +107,7 @@ router.get("/get-all", async (req: Request, res: Response) => {
 });
 
 router.get("/get-one/:id", async (req: Request, res: Response) => {
-  const { id } = req.body;
-
+  const { id } = req.params;
   try {
     const foundNotification = (await Notification.findOne({
       where: { id: id },

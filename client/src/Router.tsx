@@ -6,6 +6,7 @@ import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
+import NotificationDetails from "./pages/NotificationDetails/NotificationDetails";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -66,6 +67,10 @@ function Router() {
             <Route
               path="/notifications/create"
               element={<CreateNotification />}
+            />
+            <Route
+              path="/notifications/:id"
+              element={<NotificationDetails />}
             />
           </Route>
           <Route path="*" element={<Error404 />} />
