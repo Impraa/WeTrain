@@ -1,0 +1,37 @@
+.notification-details {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 1em;
+  .image {
+    align-self: center;
+    object-fit: cover;
+    width: 20em;
+    height: 20em;
+  }
+  .outer-div {
+    background-color: white;
+    border-radius: 1em 1em 0 0;
+    padding: 0.5em 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  .notification-details {
+    .image {
+      border-radius: 2em;
+      width: 90%;
+      height: 20em;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .notification-details {
+    .image {
+      height: 30em;
+    }
+    .outer-div {
+      padding: 1em 6em;
+    }
+  }
+}

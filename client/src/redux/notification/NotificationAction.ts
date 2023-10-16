@@ -91,7 +91,6 @@ export const getSingleNotificationAsync = async (
   try {
     const notifcation = await getSingleNotification(id);
 
-    console.log(notifcation.data);
     if (notifcation.data) {
       return dispatch(successSetNotification(notifcation.data));
     }

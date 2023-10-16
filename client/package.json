@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "buffer": "^6.0.3",
+    "framer-motion": "^10.16.4",
     "hamburger-react": "^2.5.0",
     "jsonwebtoken": "^9.0.2",
     "prop-types": "^15.8.1",
