@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./CreateNotification.scss";
 import { CreateNotification as NotificationInter } from "../../../../types/Notification";
 import IconHardDriveUpload from "../../assets/IconHardDriveUpload";
@@ -7,9 +7,21 @@ import { createNotificationAsync } from "../../redux/notification/NotificationAc
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/UserSelector";
+import {
+  selectNotification,
+  selectNotificationIsLoading,
+  selectNotifications,
+} from "../../redux/notification/NotificationSelector";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateNotification = memo(function MyFunction() {
+  const navigate = useNavigate();
+  const isLoading = useSelector(selectNotificationIsLoading);
+
   const user = useSelector(selectCurrentUser)!;
+  const notification = useSelector(selectNotification);
+  const notifications = useSelector(selectNotifications);
+  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<NotificationInter>({
@@ -17,6 +29,10 @@ const CreateNotification = memo(function MyFunction() {
     text: "",
   });
   const [image, setImage] = useState<File>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const handleSubmit = () => {
     createNotificationAsync(dispatch, formData, user, image!);
@@ -34,6 +50,20 @@ const CreateNotification = memo(function MyFunction() {
       setImage(selectedFile);
     }
   };
+
+  useEffect(() => {
+    if (notification) {
+      const isAlreadyExisting = notifications.find(
+        (item) => item.id === notification.id
+      );
+
+      if (isAlreadyExisting === undefined) {
+        return navigate(`/notifications/${notification.id}`, {
+          state: { notification: notification },
+        });
+      }
+    }
+  }, [notification]);
 
   return (
     <div className="create-notification">
@@ -70,7 +100,7 @@ const CreateNotification = memo(function MyFunction() {
           />
         </label>
       </div>
-      <CustomButton onClick={handleSubmit} type="normal">
+      <CustomButton disable={isLoading} onClick={handleSubmit} type="normal">
         Create new notification
       </CustomButton>
     </div>
