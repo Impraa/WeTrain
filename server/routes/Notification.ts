@@ -80,12 +80,11 @@ router.post(
     const { text, title } = req.body.formData;
 
     try {
-      if (req.file) {
-        await Notification.create({ title, text, image: req.file.path });
-      } else {
-        await Notification.create({ title, text });
-      }
-      return res.status(201).send("Notification was created");
+      const notification = req.file
+        ? await Notification.create({ title, text, image: req.file.path })
+        : await Notification.create({ title, text });
+
+      return res.status(201).send(notification.dataValues);
     } catch (error) {
       return res.status(500).send("Could not be create notification");
     }
