@@ -34,7 +34,6 @@ const upload = multer({
 }).single("image");
 
 const resizeImage = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.file);
   if (!req.file) {
     // No file uploaded, move to the next middleware
     return next();
@@ -104,6 +103,82 @@ router.get("/get-all", async (req: Request, res: Response) => {
     return res.status(500).send("Could find any notifications");
   }
 });
+
+router.put(
+  "/update/:id",
+  resizeImage,
+  upload,
+  isUserAdmin,
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { text, title } = req.body.formData;
+
+    try {
+      const notification = (await Notification.findByPk(
+        id
+      )) as Model<NotificationInter>;
+
+      if (!notification) {
+        return res.status(404).send("Notification not found");
+      }
+
+      if (text) {
+        await notification.update({ text: text });
+      }
+      if (title) {
+        await notification.update({ title: title });
+      }
+      if (req.file) {
+        fs.unlink(notification.dataValues.image, (err) => {
+          if (err) {
+            console.error("Error deleting image:", err);
+          } else {
+            console.log("Image deleted successfully");
+          }
+        });
+        await notification.update({ image: req.file!.path });
+      }
+
+      return res.status(200).send(notification.dataValues);
+    } catch (error) {
+      return res.status(500).send("Notification couldn't have been updated");
+    }
+  }
+);
+
+router.delete(
+  "/delete/:id",
+  isUserAdmin,
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const notification = (await Notification.findByPk(
+        id
+      )) as Model<NotificationInter>;
+
+      if (!notification) {
+        return res.status(404).send("Notification not found");
+      }
+
+      const imagePath = notification.dataValues.image;
+
+      if (imagePath) {
+        fs.unlink(imagePath, (err) => {
+          if (err) {
+            console.error("Error deleting image:", err);
+          }
+        });
+      }
+
+      await notification.destroy();
+
+      return res.status(204).send("Notification deleted successfully");
+    } catch (error) {
+      return res.status(500).send("Notification couldn't have been updated");
+    }
+  }
+);
 
 router.get("/get-one/:id", async (req: Request, res: Response) => {
   const { id } = req.params;

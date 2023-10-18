@@ -60,3 +60,29 @@ export const getSingleNotification = (id: string) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const updateNotification = (
+  formData: CreateNotification,
+  id: string,
+  user: User,
+  image: File
+) => {
+  return axios
+    .put(
+      `http://localhost:3000/notification/update/${id}`,
+      { formData: formData, image: image, user: user },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

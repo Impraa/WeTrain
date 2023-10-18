@@ -7,6 +7,7 @@ import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
 import NotificationDetails from "./pages/NotificationDetails/NotificationDetails";
+import UpdateNotification from "./pages/Update-Notification/UpdateNotification";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -67,6 +68,10 @@ function Router() {
             <Route
               path="/notifications/create"
               element={<CreateNotification />}
+            />
+            <Route
+              path="/notifications/update/:id"
+              element={<UpdateNotification />}
             />
             <Route
               path="/notifications/:id"

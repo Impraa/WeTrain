@@ -300,11 +300,22 @@ router.post(
     try {
       const { id } = req.body;
 
-      await User.update({ image: req.file!.path }, { where: { id: id } });
+      const user = (await User.findByPk(id)) as Model<UserInter>;
 
-      const user = (await User.findOne({
-        where: { id: id },
-      })) as Model<UserInter>;
+      if (user.dataValues.image && req.file) {
+        fs.unlink(user.dataValues.image, (err) => {
+          if (err) {
+            console.error("Error deleting image:", err);
+          } else {
+            console.log("Image deleted successfully");
+          }
+        });
+        user.dataValues.image = req.file.path;
+      } else {
+        user.dataValues.image = req.file!.path;
+      }
+
+      await user.save();
 
       const token = Jwt.sign(user.dataValues, process.env.SECRET || "tajna", {
         expiresIn: "1h",

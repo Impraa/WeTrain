@@ -9,6 +9,7 @@ import {
   createNotification,
   getAllNotifications,
   getSingleNotification,
+  updateNotification,
 } from "../../services/Notification";
 import { User } from "../../../../types/User";
 
@@ -89,10 +90,10 @@ export const getSingleNotificationAsync = async (
 ) => {
   dispatch(startSetNotification());
   try {
-    const notifcation = await getSingleNotification(id);
+    const notification = await getSingleNotification(id);
 
-    if (notifcation.data) {
-      return dispatch(successSetNotification(notifcation.data));
+    if (notification.data) {
+      return dispatch(successSetNotification(notification.data));
     }
 
     return dispatch(
@@ -106,5 +107,28 @@ export const getSingleNotificationAsync = async (
         "Could not recive notification you are currently looking for, please try again or check for it's existance."
       )
     );
+  }
+};
+
+export const updateNotificationAsync = async (
+  dispatch: Dispatch,
+  formData: CreateNotification,
+  id: string,
+  user: User,
+  file: File
+) => {
+  dispatch(startSetNotification());
+  try {
+    const notification = await updateNotification(formData, id, user, file);
+
+    if (notification.data) {
+      return dispatch(successSetNotification(notification.data));
+    }
+
+    return dispatch(
+      errorSetNotificaton("Could not update notification,please try again")
+    );
+  } catch (error) {
+    dispatch(errorSetNotificaton("Could not update notification"));
   }
 };

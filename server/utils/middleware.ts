@@ -6,7 +6,6 @@ export const isUserAdmin = (
   next: NextFunction
 ) => {
   try {
-    console.log(req.body);
     if (req.body.user.role === "admin") {
       return next();
     }
