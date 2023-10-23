@@ -86,3 +86,22 @@ export const updateNotification = (
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const deleteNotification = (
+  id: string,
+  user: User,
+) => {
+  return axios
+    .delete(
+      `http://localhost:3000/notification/delete/${id}`, {
+      data: {user:user}
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

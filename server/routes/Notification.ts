@@ -151,7 +151,7 @@ router.delete(
   isUserAdmin,
   async (req: Request, res: Response) => {
     const { id } = req.params;
-
+    console.log(id);
     try {
       const notification = (await Notification.findByPk(
         id

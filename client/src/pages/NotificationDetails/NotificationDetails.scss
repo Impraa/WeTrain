@@ -1,3 +1,4 @@
+@import "../../utils/variables";
 .notification-details {
   display: flex;
   flex-direction: column;
@@ -26,6 +27,27 @@
     background-color: white;
     border-radius: 1em 1em 0 0;
     padding: 0.5em 1em;
+    h2{
+      .pencil{
+       color:$successColor;
+        transition: 0.25s ease-in-out all;
+        &:hover{
+          background-color:$successColor;
+        color: white;
+        cursor: pointer;
+         
+        }
+      }
+      .trash-can{
+        color:$errorColor;
+        transition: 0.25s ease-in-out all;
+        &:hover{
+          color: white;
+          background-color: $errorColor;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
 

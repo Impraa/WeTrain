@@ -9,13 +9,15 @@ import {
   getSingleUserAsync,
   setFoundUserFailed,
 } from "../../redux/user/UserAction";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { User } from "../../../../types/User";
+import Spinner from "../../components/spinner/Spinner";
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser) as unknown as User;
   const foundUser = useSelector(selectFoundUser) as unknown as User;
+  const location = useLocation();
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -25,11 +27,14 @@ const Profile = () => {
       getSingleUserAsync(dispatch, id as string);
       dispatch(setFoundUserFailed(null));
     }
-  }, [user, id, dispatch]);
+  }, [location.pathname]);
 
   return (
     <div className="profile">
-      <UserInfo user={user ? user : foundUser} />
+      { foundUser ?
+      <UserInfo user={user ? user : foundUser} /> :
+      <Spinner/>
+}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { createAction } from "../GenericAction";
 import { NotificationActionType } from "./NotificationTypes";
 import {
   createNotification,
+  deleteNotification,
   getAllNotifications,
   getSingleNotification,
   updateNotification,
@@ -132,3 +133,20 @@ export const updateNotificationAsync = async (
     dispatch(errorSetNotificaton("Could not update notification"));
   }
 };
+
+export const deleteNotifcationAsync = async (dispatch:Dispatch, id:string,user:User) => {
+  dispatch(startSetNotification());
+  try {
+    const notification = await deleteNotification(id,user);
+
+    if(notification.status === 204){
+      return true;
+    }
+
+    dispatch(errorSetNotificaton("Notification could not be deleted, try again"));
+    return false
+  } catch (error) {
+    dispatch(errorSetNotificaton("Notification could not be deleted"));
+    return false;
+  }
+}
