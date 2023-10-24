@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { sequelize } from "./utils/database";
 import User from "./routes/User";
 import Notification from "./routes/Notification";
+import Membership from "./routes/Membership";
 import cors from "cors";
 
 import dotenv from "dotenv";
@@ -32,6 +33,7 @@ app.use(express.json({ limit: "10mb" }));
 
 app.use("/user", User);
 app.use("/notification", Notification);
+app.use("/membership", Membership);
 
 /* app.all("*", (req: Request, res: Response, next: NextFunction) => {
   res.status(404).send("Method not found");
