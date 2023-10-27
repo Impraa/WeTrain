@@ -7,11 +7,12 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { userReducer } from "./user/UserReducer";
 import { notificationReducer } from "./notification/NotificationReducer";
+import membershipReducer from "./membership/MembershipReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user", "notification"],
+  blacklist: ["user", "notification", "membership"],
 };
 
 const userPersistConfig = {
@@ -26,9 +27,16 @@ const notificationPersistConfig = {
   whitelist: ["notifications"],
 };
 
+const membershipPersistConfig = {
+  key: "membership",
+  storage,
+  blacklist: ["error", "isLoading"],
+};
+
 export const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   notification: persistReducer(notificationPersistConfig, notificationReducer),
+  membership: persistReducer(membershipPersistConfig, membershipReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
