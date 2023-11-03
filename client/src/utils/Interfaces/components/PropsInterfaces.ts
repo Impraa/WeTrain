@@ -33,4 +33,7 @@ export interface BasicInfo {
 
 export interface Notifcation {
   notification: Notification;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
+  isHovered: number;
 }

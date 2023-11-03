@@ -3,7 +3,10 @@ import { useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Spinner from "../../components/spinner/Spinner";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { deleteNotifcationAsync, getSingleNotificationAsync } from "../../redux/notification/NotificationAction";
+import {
+  deleteNotifcationAsync,
+  getSingleNotificationAsync,
+} from "../../redux/notification/NotificationAction";
 import { useDispatch, useSelector } from "react-redux";
 import { selectNotification } from "../../redux/notification/NotificationSelector";
 import "./NotificationDetails.scss";
@@ -27,10 +30,12 @@ const NotificationDetails = () => {
   }, [id]);
 
   const handleDelete = () => {
-    deleteNotifcationAsync(dispatch,id as string,user!).then((response) => {if(response === true){
-      return navigate("/");
-    }})
-  }
+    deleteNotifcationAsync(dispatch, id as string, user!).then((response) => {
+      if (response === true) {
+        return navigate("/");
+      }
+    });
+  };
 
   const notification = useSelector(selectNotification);
   return (
@@ -54,7 +59,25 @@ const NotificationDetails = () => {
             }}
             className="outer-div"
           >
-            <h2>{notification.title} {user && user.role === "admin" ?<><IconPencil onClick={() => navigate(`/notifications/update/${id}`)} className="pencil"/> <IconTrashFill onClick={() => {handleDelete()}} className="trash-can"/></> : ""}</h2>
+            <h2>
+              {notification.title}{" "}
+              {user && user.role === "admin" ? (
+                <>
+                  <IconPencil
+                    onClick={() => navigate(`/notifications/update/${id}`)}
+                    className="pencil"
+                  />{" "}
+                  <IconTrashFill
+                    onClick={() => {
+                      handleDelete();
+                    }}
+                    className="trash-can"
+                  />
+                </>
+              ) : (
+                ""
+              )}
+            </h2>
             <p>{notification.text} </p>
           </motion.div>
         </>
@@ -75,8 +98,26 @@ const NotificationDetails = () => {
             }}
             className="outer-div"
           >
-            <h2>{notificationProp.title} {user && user.role === "admin" ?<><IconPencil onClick={() => navigate(`/notifications/update/${id}`)} className="pencil"/> <IconTrashFill onClick={() => {handleDelete()}} className="trash-can"/></> : ""}</h2>
-            
+            <h2>
+              {notificationProp.title}{" "}
+              {user && user.role === "admin" ? (
+                <>
+                  <IconPencil
+                    onClick={() => navigate(`/notifications/update/${id}`)}
+                    className="pencil"
+                  />{" "}
+                  <IconTrashFill
+                    onClick={() => {
+                      handleDelete();
+                    }}
+                    className="trash-can"
+                  />
+                </>
+              ) : (
+                ""
+              )}
+            </h2>
+
             <p>{notificationProp.text}</p>
           </motion.div>
         </>
