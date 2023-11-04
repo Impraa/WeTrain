@@ -10,45 +10,53 @@ const Notification: React.FC<Notifcation> = ({
   onMouseOut,
   isHovered,
 }) => {
-  return isHovered !== notification.id ? (
-    <Link
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-      to={`/notifications/${notification.id}`}
-      className={
-        isHovered !== 0 && isHovered !== notification.id
-          ? "notification blur"
-          : "notification"
-      }
-    >
-      <div className="image">
-        {notification.image ? (
-          <img src={`http://localhost:3000/${notification.image}`} />
-        ) : (
-          <WeTrainLogo />
-        )}
-      </div>
-      <h2>{notification.title}</h2>
-    </Link>
-  ) : (
-    <Link
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-      to={`/notifications/${notification.id}`}
-      className="notification hovered"
-    >
-      <div className="image">
-        {notification.image ? (
-          <img src={`http://localhost:3000/${notification.image}`} />
-        ) : (
-          <WeTrainLogo />
-        )}
-      </div>
-      <div className="text">
+  return (
+    <div className="wrapper">
+      {isHovered === notification.id ? (
+        <Link
+          onMouseOver={onMouseOver}
+          onMouseOut={onMouseOut}
+          to={`/notifications/${notification.id}`}
+          className="notification hovered"
+        >
+          <div className="image">
+            {notification.image ? (
+              <img src={`http://localhost:3000/${notification.image}`} />
+            ) : (
+              <WeTrainLogo />
+            )}
+          </div>
+          <div className="text">
+            <h2>{notification.title}</h2>
+            <p>{notification.text.slice(0, 50)}</p>
+          </div>
+        </Link>
+      ) : (
+        ""
+      )}
+
+      <Link
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+        to={`/notifications/${notification.id}`}
+        className={
+          isHovered !== 0 && isHovered !== notification.id
+            ? "notification blur"
+            : isHovered === notification.id
+            ? "hide notification"
+            : "notification"
+        }
+      >
+        <div className="image">
+          {notification.image ? (
+            <img src={`http://localhost:3000/${notification.image}`} />
+          ) : (
+            <WeTrainLogo />
+          )}
+        </div>
         <h2>{notification.title}</h2>
-        <p>{notification.text.slice(0, 50)}</p>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

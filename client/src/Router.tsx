@@ -6,8 +6,6 @@ import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
-import NotificationDetails from "./pages/NotificationDetails/NotificationDetails";
-import UpdateNotification from "./pages/Update-Notification/UpdateNotification";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -32,6 +30,13 @@ const Notifications = lazy(() => import("./pages/Notifications/Notifications"));
 const CreateNotification = lazy(
   () => import("./pages/Create-Notificaton/CreateNotification")
 );
+const NotificationDetails = lazy(
+  () => import("./pages/NotificationDetails/NotificationDetails")
+);
+const UpdateNotification = lazy(
+  () => import("./pages/Update-Notification/UpdateNotification")
+);
+const Memebership = lazy(() => import("./pages/Membership/Memebership"));
 
 function Router() {
   const user = useSelector(selectCurrentUser);
@@ -42,6 +47,7 @@ function Router() {
         <Navbar />
         <Routes>
           <Route index element={<Homepage />} />
+          <Route path="/membership" element={<Memebership />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />

@@ -1,0 +1,54 @@
+.first-time-membership {
+  text-align: center;
+  h2 {
+    font-size: 2em;
+    color: white;
+
+    text-shadow: -1.25px 0 black, 0 1.25px black, 1.25px 0 black,
+      0 -1.25px black;
+  }
+  h3 {
+    font-size: 1.5em;
+    color: white;
+    text-shadow: -1.25px 0 black, 0 1.25px black, 1.25px 0 black,
+      0 -1.25px black;
+  }
+  .keypoint-container {
+    margin: 3em 2em;
+  }
+  button {
+    margin: 1.5em 0 3em 0;
+    font-size: 1.5em;
+  }
+}
+
+@media (min-width: 768px) {
+  .first-time-membership {
+    h2 {
+      margin: 2em 0 0 0;
+      font-size: 2.25em;
+    }
+    h3 {
+      margin: 0 0 2em 0;
+      font-size: 2em;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .first-time-membership {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .keypoint-container {
+      margin: 3em 0.25em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      margin: 0 0 2em 0;
+    }
+  }
+}

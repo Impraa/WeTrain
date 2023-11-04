@@ -1,0 +1,31 @@
+@import "../../utils/variables";
+.keypoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3em 0;
+  svg {
+    height: 5em;
+    width: 5em;
+    padding: 0 0.5em;
+    border-radius: 3em;
+    color: white;
+    background-color: $secondaryColor;
+  }
+  h4 {
+    font-size: 1.25em;
+    padding: 1em 0;
+  }
+
+  p {
+    font-size: 1.125em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .keypoint {
+    margin: 3em 1em;
+    max-width: 18em;
+  }
+}

@@ -1,3 +1,11 @@
-export const Memebership = () => {
-  return <div>Memebership</div>;
+import FirstTimeMembership from "../../components/first-time-membership/FirstTimeMembership";
+
+const Memebership = () => {
+  return (
+    <div>
+      <FirstTimeMembership />
+    </div>
+  );
 };
+
+export default Memebership;

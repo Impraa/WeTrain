@@ -37,3 +37,9 @@ export interface Notifcation {
   onMouseOut: () => void;
   isHovered: number;
 }
+
+export interface Keypoint {
+  text: string;
+  svg: React.FC;
+  title: string;
+}

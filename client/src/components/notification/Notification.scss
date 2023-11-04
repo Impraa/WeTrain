@@ -1,4 +1,8 @@
 @import "../../utils/variables";
+.wrapper {
+  margin: 4em 0;
+  transition: 0.25s all ease-out;
+}
 .notification:first-child {
   margin: 2em 4em;
 }
@@ -8,7 +12,7 @@
   margin: 3.5em 4em;
   border-radius: 2%;
   align-items: center;
-  flex-basis: 25%;
+  z-index: 1;
   text-decoration: none;
   color: black;
   padding: 0.5em 0.25em;
@@ -29,7 +33,13 @@
   &.hovered {
     flex-direction: row;
     filter: none;
-    flex-basis: 30%;
+    width: 75%;
+    z-index: 2;
+    position: absolute;
+    background-color: white;
+    animation: hoverPop 0.25s;
+    transform: scale(1.25);
+    transition: 0.25s all ease-in-out;
     .image {
       svg,
       img {
@@ -42,10 +52,15 @@
     .text {
       padding: 0 1em;
       h2 {
+        text-align: center;
         transition: 0.25s all ease-in-out;
       }
     }
   }
+}
+
+.hide {
+  visibility: hidden;
 }
 
 .blur {
@@ -53,12 +68,15 @@
 }
 
 @media (min-width: 768px) {
+  .wrapper {
+    flex-basis: 30%;
+  }
   .notification,
   .notification:first-child {
     margin: 2em 4em;
     padding: 2em 0.5em;
     &.hovered {
-      flex-basis: 40%;
+      width: inherit;
       .image {
         svg,
         img {
@@ -79,10 +97,13 @@
 }
 
 @media (min-width: 1280px) {
+  .wrapper {
+    flex-basis: 30%;
+  }
   .notification,
   .notification:first-child {
     padding: 4em 2em;
-    flex-basis: 30%;
+    flex-basis: 40%;
     .image {
       svg,
       img {
@@ -94,7 +115,8 @@
       font-size: 1.75em;
     }
     &.hovered {
-      flex-basis: 40%;
+      width: 25%;
+
       .image {
         svg,
         img {
@@ -105,5 +127,17 @@
         }
       }
     }
+  }
+}
+
+@keyframes hoverPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.125);
+  }
+  100% {
+    transform: scale(1.25);
   }
 }
