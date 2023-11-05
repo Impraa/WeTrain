@@ -6,6 +6,7 @@ import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
+import Payment from "./pages/Payment/Payment";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -40,7 +41,6 @@ const Memebership = lazy(() => import("./pages/Membership/Memebership"));
 
 function Router() {
   const user = useSelector(selectCurrentUser);
-
   return (
     <>
       <Suspense fallback={<Spinner />}>
@@ -55,6 +55,7 @@ function Router() {
           <Route path="/reset-password/:id" element={<ResetPassword />} />
           <Route path="/verify/:id" element={<Verify />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/payment" element={<Payment />} />
           <Route
             path="/edit-profile"
             element={

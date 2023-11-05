@@ -44,7 +44,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(logger, thunk),
+    getDefaultMiddleware()
+      .concat(logger, thunk)
+      .concat(
+        getDefaultMiddleware({
+          serializableCheck: false,
+        })
+      ),
 });
 
 export const persistor = persistStore(store);

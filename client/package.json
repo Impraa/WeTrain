@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.3.1",
+    "@stripe/stripe-js": "^2.1.11",
     "axios": "^1.5.0",
     "buffer": "^6.0.3",
     "framer-motion": "^10.16.4",
@@ -28,6 +30,7 @@
     "redux-thunk": "^2.4.2",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "sass": "^1.64.2",
+    "stripe": "^14.3.0",
     "vite-compatible-readable-stream": "^3.6.1",
     "vite-plugin-svgr": "^3.2.0"
   },

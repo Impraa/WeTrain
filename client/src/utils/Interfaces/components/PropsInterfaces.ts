@@ -12,6 +12,7 @@ export interface CustomButton {
   children: ReactNode;
   onClick: () => void;
   type: string;
+  buttonType?: "button" | "submit" | "reset" | undefined;
   disable?: boolean;
 }
 

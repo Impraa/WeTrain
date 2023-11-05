@@ -6,6 +6,7 @@ const CustomButton: React.FC<CustomButtonInter> = ({
   children,
   onClick,
   type,
+  buttonType = "button",
   disable = false,
 }) => {
   return (
@@ -19,6 +20,7 @@ const CustomButton: React.FC<CustomButtonInter> = ({
           ? "inverted"
           : "nav-button"
       }
+      type={buttonType}
       onClick={onClick}
       disabled={disable}
     >

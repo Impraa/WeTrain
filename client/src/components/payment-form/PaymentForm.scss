@@ -1,0 +1,11 @@
+.payment-form {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .card-number {
+      width: 20em;
+    }
+  }
+}
