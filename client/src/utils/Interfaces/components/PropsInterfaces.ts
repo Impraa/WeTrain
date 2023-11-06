@@ -44,3 +44,8 @@ export interface Keypoint {
   svg: React.FC;
   title: string;
 }
+
+export interface MembershipPlan {
+  label: "Basic" | "Advanced" | "Premium";
+  id: "basic" | "advanced" | "premium";
+}

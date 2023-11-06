@@ -7,6 +7,7 @@ import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/UserSelector";
 import Payment from "./pages/Payment/Payment";
+import ChooseAMembership from "./pages/Choose-a-membership/ChooseAMembership";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Navbar = lazy(() => import("./layout/navbar/Navbar"));
@@ -56,6 +57,7 @@ function Router() {
           <Route path="/verify/:id" element={<Verify />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/choose-a-memebership" element={<ChooseAMembership />} />
           <Route
             path="/edit-profile"
             element={

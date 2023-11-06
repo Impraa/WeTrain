@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import IconFoodApple from "../../assets/Icons/IconApple";
 import IconDumbbell from "../../assets/Icons/IconDumbbell";
 import IconWhistle from "../../assets/Icons/IconWhistle";
@@ -24,6 +25,8 @@ const keypoints = [
 ];
 
 function FirstTimeMembership() {
+  const navigation = useNavigate();
+
   return (
     <div className="first-time-membership">
       <h2>Don&#39;t have a We Train membership yet?</h2>
@@ -37,7 +40,12 @@ function FirstTimeMembership() {
           />
         ))}
       </div>
-      <CustomButton onClick={() => {}} type="normal">
+      <CustomButton
+        onClick={() => {
+          return navigation("/choose-a-memebership");
+        }}
+        type="normal"
+      >
         Join now
       </CustomButton>
     </div>
