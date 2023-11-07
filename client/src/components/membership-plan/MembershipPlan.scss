@@ -1,0 +1,72 @@
+@import "../../utils/variables";
+.membership-plan {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 75%;
+  padding: 1em 0;
+  .radio-button {
+    display: flex;
+    justify-content: space-between;
+    label {
+      color: $secondaryColor;
+      font-weight: 600;
+      font-size: 1.5em;
+      letter-spacing: 0.04em;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input[type="radio"] {
+      width: 2em;
+      height: 2em;
+      transition: 0.2s all ease-out;
+      &:checked {
+        animation: selectRadioButton 0.2s;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .text {
+    h3 {
+      .price-tag {
+        color: $secondaryColor;
+      }
+
+      padding: 0.5em 0;
+    }
+    p {
+      line-height: 1.5em;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .membership-plan {
+    .radio-button {
+      font-size: 1.25em;
+      input[type="radio"] {
+        width: 2.5em;
+        height: 2.5em;
+      }
+    }
+    .text {
+      font-size: 1.25em;
+    }
+  }
+}
+
+@keyframes selectRadioButton {
+  0% {
+    transform: scale(0.2);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

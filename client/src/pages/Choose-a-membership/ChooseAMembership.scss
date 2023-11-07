@@ -1,0 +1,31 @@
+.choose-a-membership {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h2 {
+    margin: 0 0 1.25em 0.25em;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 2em 0;
+  }
+  button {
+    align-self: center;
+    margin: 2em 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .choose-a-membership {
+    h2 {
+      margin: 1em 0 1.5em 0;
+      font-size: 2.25em;
+      align-self: center;
+    }
+    button {
+      font-size: 1.5em;
+    }
+  }
+}

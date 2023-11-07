@@ -1,11 +1,25 @@
 import React from "react";
 import { MembershipPlan as MembershipPlanInter } from "../../utils/Interfaces/components/PropsInterfaces";
+import "./MembershipPlan.scss";
 
-const MembershipPlan: React.FC<MembershipPlanInter> = ({ label, id }) => {
+const MembershipPlan: React.FC<MembershipPlanInter> = ({
+  label,
+  id,
+  price,
+  description,
+}) => {
   return (
     <div className="membership-plan">
-      <label>{label} plan</label>
-      <input type="radio" name="membership-plan" id={id} value={id} />
+      <div className="radio-button">
+        <label>{label} plan</label>
+        <input type="radio" name="membership-plan" id={id} value={id} />
+      </div>
+      <div className="text">
+        <h3>
+          Price: <span className="price-tag">{price} &euro;</span>{" "}
+        </h3>
+        <p>{description}</p>
+      </div>
     </div>
   );
 };

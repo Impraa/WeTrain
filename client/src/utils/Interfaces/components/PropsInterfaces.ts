@@ -48,4 +48,6 @@ export interface Keypoint {
 export interface MembershipPlan {
   label: "Basic" | "Advanced" | "Premium";
   id: "basic" | "advanced" | "premium";
+  description: string;
+  price: string;
 }

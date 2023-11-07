@@ -34,6 +34,7 @@ function FirstTimeMembership() {
       <div className="keypoint-container">
         {keypoints.map((keypoint) => (
           <Keypoint
+            key={keypoint.text}
             title={keypoint.title}
             text={keypoint.text}
             svg={keypoint.svg}
