@@ -333,13 +333,13 @@ router.post(
 router.post("/create-payment-intent", async (req: Request, res: Response) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { amount } = req.body;
+  console.log(amount);
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,
       currency: "eur",
       payment_method_types: ["card"],
     });
-
     return res.status(201).send(paymentIntent.client_secret);
   } catch (error) {
     return res.status(500).send("Creating payment intet went wrong try again");

@@ -10,6 +10,7 @@ import { createAction } from "../GenericAction";
 import { UserActionType } from "./UserTypes";
 import Jwt from "jsonwebtoken";
 import {
+  createPaymentIntent,
   getSingleUser,
   loginUser,
   registerUser,
@@ -224,5 +225,25 @@ export const resetUserPasswordAsync = async (
     }
   } catch (error) {
     dispatch(setUserFailed("Unable to reset password" + error));
+  }
+};
+
+export const createPaymentIntentAsync = async (
+  dispatch: Dispatch,
+  amount: string
+) => {
+  try {
+    const response = await createPaymentIntent(amount);
+    console.log(response.status);
+    if (response.status === 201) {
+      console.log("?");
+      window.sessionStorage.setItem("client_secret", response.data);
+    } else {
+      return dispatch(setUserFailed("Unable to create payment intent"));
+    }
+  } catch (error) {
+    return dispatch(
+      setUserFailed("Unable to create payment intent, try again later" + error)
+    );
   }
 };

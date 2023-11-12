@@ -2,6 +2,9 @@ import MembershipPlan from "../../components/membership-plan/MembershipPlan";
 import { MembershipPlan as MembershipPlanInter } from "../../utils/Interfaces/components/PropsInterfaces";
 import CustomButton from "../../components/custom-button/CustomButton";
 import "./ChooseAMembership.scss";
+import { useState } from "react";
+import { createPaymentIntentAsync } from "../../redux/user/UserAction";
+import { useDispatch } from "react-redux";
 
 const membershipPlans: MembershipPlanInter[] = [
   {
@@ -28,23 +31,35 @@ const membershipPlans: MembershipPlanInter[] = [
 ];
 
 const ChooseAMembership = () => {
+  const [planPrice, setPlanPrice] = useState<string>("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    createPaymentIntentAsync(dispatch, planPrice);
+  };
+
   return (
     <div className="choose-a-membership">
       <h2>Choose a membership plan</h2>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         {membershipPlans.map((item) => (
           <MembershipPlan
             key={item.id}
             label={item.label}
             id={item.id}
             price={item.price}
+            onClick={() => {
+              setPlanPrice(item.price);
+            }}
             description={item.description}
           />
         ))}
+        <CustomButton buttonType="submit" type="normal" onClick={() => {}}>
+          Pay now
+        </CustomButton>
       </form>
-      <CustomButton buttonType="submit" type="normal" onClick={() => {}}>
-        Pay now
-      </CustomButton>
     </div>
   );
 };

@@ -173,3 +173,24 @@ export const resetUserPassword = (newPassword: string, id: number) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const createPaymentIntent = (amount: string) => {
+  return axios
+    .post(
+      `http://localhost:3000/user/create-payment-intent`,
+      { amount: amount },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        withCredentials: true,
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

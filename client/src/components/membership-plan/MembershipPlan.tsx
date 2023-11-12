@@ -7,10 +7,11 @@ const MembershipPlan: React.FC<MembershipPlanInter> = ({
   id,
   price,
   description,
+  onClick = () => {},
 }) => {
   return (
     <div className="membership-plan">
-      <div className="radio-button">
+      <div onClick={onClick} className="radio-button">
         <label>{label} plan</label>
         <input type="radio" name="membership-plan" id={id} value={id} />
       </div>

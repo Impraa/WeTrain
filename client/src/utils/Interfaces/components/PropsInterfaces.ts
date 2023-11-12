@@ -50,4 +50,5 @@ export interface MembershipPlan {
   id: "basic" | "advanced" | "premium";
   description: string;
   price: string;
+  onClick?: () => void;
 }
