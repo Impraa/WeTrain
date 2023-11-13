@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Verify } from "./pages/Verify/Verify";
-import { CheckAuth } from "./utils/Middleware";
+import { CheckAuth, CheckClientSecret } from "./utils/Middleware";
 import Spinner from "./components/spinner/Spinner";
 import { BasicInfo } from "./components/basic-info/BasicInfo";
 import { useSelector } from "react-redux";
@@ -56,8 +56,26 @@ function Router() {
           <Route path="/reset-password/:id" element={<ResetPassword />} />
           <Route path="/verify/:id" element={<Verify />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/choose-a-memebership" element={<ChooseAMembership />} />
+          <Route
+            path="/payment"
+            element={
+              <CheckClientSecret>
+                <Payment
+                  client_secret={
+                    window.sessionStorage.getItem("client_secret") as string
+                  }
+                />
+              </CheckClientSecret>
+            }
+          />
+          <Route
+            path="/choose-a-memebership"
+            element={
+              <CheckAuth>
+                <ChooseAMembership />{" "}
+              </CheckAuth>
+            }
+          />
           <Route
             path="/edit-profile"
             element={

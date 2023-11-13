@@ -1,4 +1,8 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { useState } from "react";
 import CustomButton from "../custom-button/CustomButton";
 import "./PaymentForm.scss";
@@ -21,7 +25,7 @@ const PaymentForm = () => {
   return (
     <div className="payment-form">
       <form onSubmit={paymentHandler}>
-        <CardElement />
+        <PaymentElement />
         <CustomButton
           buttonType="submit"
           onClick={() => {}}

@@ -333,7 +333,6 @@ router.post(
 router.post("/create-payment-intent", async (req: Request, res: Response) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { amount } = req.body;
-  console.log(amount);
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,

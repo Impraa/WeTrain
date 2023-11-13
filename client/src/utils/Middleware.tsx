@@ -13,3 +13,13 @@ export const CheckAuth: React.FC<CheckAuthInter> = ({ children }) => {
     <Navigate to="/login" replace state={{ path: location.pathname }} />
   );
 };
+
+export const CheckClientSecret: React.FC<CheckAuthInter> = ({ children }) => {
+  const clientSecret = window.sessionStorage.getItem("client_secret");
+
+  return clientSecret ? (
+    children
+  ) : (
+    <Navigate to="/choose-a-memebership" replace />
+  );
+};
