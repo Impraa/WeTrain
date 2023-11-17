@@ -38,7 +38,7 @@ const ChooseAMembership = () => {
 
   useEffect(() => {
     if (window.sessionStorage.getItem("client_secret")) {
-      return redirect("/payment");
+      redirect("/payment");
     }
   }, [window.sessionStorage]);
 
