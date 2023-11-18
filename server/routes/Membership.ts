@@ -23,6 +23,23 @@ router.get("/:userId", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/create", async (req: Request, res: Response) => {});
+router.post("/create", async (req: Request, res: Response) => {
+  const { userId } = req.body;
+  try {
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + 30);
+
+    const newMembership = (await Membership.create({
+      expiryDate: expiryDate,
+      userId: userId,
+    })) as Model<MembershipInter>;
+
+    return res.status(201).send(newMembership.dataValues.expiryDate);
+  } catch (error) {
+    return res
+      .status(500)
+      .send("Creating user membership went wrong, please try again");
+  }
+});
 
 export default router;

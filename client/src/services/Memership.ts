@@ -16,3 +16,24 @@ export const getSingleMembership = (id: string) => {
       } as unknown as AxiosResponse<any, any>;
     });
 };
+
+export const createUserMembership = (userId: string) => {
+  return axios
+    .post(
+      `http://localhost:3000/membership/create`,
+      { userId: userId },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        withCredentials: true,
+      }
+    )
+    .catch((error) => {
+      return {
+        statusText: error.response.data,
+        status: error.response.status,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as unknown as AxiosResponse<any, any>;
+    });
+};

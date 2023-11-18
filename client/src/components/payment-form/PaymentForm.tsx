@@ -3,21 +3,37 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomButton from "../custom-button/CustomButton";
 import "./PaymentForm.scss";
 import { Message } from "../message/Message";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/user/UserSelector";
+import { createUserMembershipAsync } from "../../redux/membership/MembershipAction";
+import { selectMembershipError } from "../../redux/membership/MembershipSelector";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const navigation = useNavigate();
+  const location = useLocation();
+
+  const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser)!;
+  const membershipError = useSelector(selectMembershipError);
 
   const [paymentError, setPaymentError] = useState<string>("");
 
   const [isProcessingPayment, setIsProcessingPayment] =
     useState<boolean>(false);
+
+  const [paymentSuccess, setPaymentSuccess] = useState<string>("");
+
+  useEffect(() => {
+    setPaymentError("");
+    setPaymentSuccess("");
+  }, [location.pathname]);
 
   const paymentHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,12 +56,25 @@ const PaymentForm = () => {
     if (error) {
       setPaymentError(error as unknown as string);
     } else {
-      return navigation("/");
+      createUserMembershipAsync(dispatch, user.id);
+
+      if (membershipError) {
+        setPaymentError(membershipError);
+      } else {
+        setPaymentSuccess(
+          "Payment was successfully you will be redirected to the homepage shortly"
+        );
+        window.sessionStorage.removeItem("client_secret");
+        setTimeout(() => {
+          return navigation("/");
+        }, 3000);
+      }
     }
   };
 
   return (
     <div className="payment-form">
+      {paymentSuccess && <Message type="success">{paymentSuccess}</Message>}
       {paymentError && <Message type="error">{paymentError}</Message>}
       <h2>Payment form</h2>
       <form onSubmit={paymentHandler}>

@@ -1,7 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { createAction } from "../GenericAction";
 import { MembershipActionType } from "./MembershipTypes";
-import { getSingleMembership } from "../../services/Memership";
+import {
+  createUserMembership,
+  getSingleMembership,
+} from "../../services/Memership";
 
 export const setMembershipStart = () => {
   return createAction(MembershipActionType.START_MEMBERSHIP_SET);
@@ -29,6 +32,28 @@ export const getSingleMembershipAsync = async (
     }
 
     dispatch(setMembershipError("User has no membership currently"));
+  } catch (error) {
+    dispatch(setMembershipError(error as string));
+  }
+};
+
+export const createUserMembershipAsync = async (
+  dispatch: Dispatch,
+  userId: string
+) => {
+  dispatch(setMembershipStart());
+  try {
+    const membership = await createUserMembership(userId);
+    console.log(membership);
+    if (membership.status == 200 || membership.status == 201) {
+      return dispatch(setMembershipSuccess(membership.data));
+    }
+
+    dispatch(
+      setMembershipError(
+        "Occured an error while trying to set user's membership"
+      )
+    );
   } catch (error) {
     dispatch(setMembershipError(error as string));
   }
