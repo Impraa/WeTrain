@@ -341,7 +341,6 @@ router.post("/create-payment-intent", async (req: Request, res: Response) => {
     });
     return res.status(201).send(paymentIntent.client_secret);
   } catch (error) {
-    console.log(error);
     return res.status(500).send("Creating payment intet went wrong try again");
   }
 });

@@ -1,7 +1,8 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { MembershipActionType } from "./MembershipTypes";
+import { MembershipInitalState } from "../../utils/Interfaces/redux/AttributeInterfaces";
 
-const INITAL_STATE = {
+const INITAL_STATE: MembershipInitalState = {
   expiryDate: null,
   isLoading: false,
   error: null,
@@ -18,7 +19,7 @@ const membershipReducer = (state = INITAL_STATE, action: AnyAction) => {
       return { ...state, error: payload };
 
     case MembershipActionType.SUCCESS_MEMBERSHIP_SET:
-      return { ...state, expiryDate: payload };
+      return { ...state, expiryDate: new Date(payload) };
 
     default:
       return state;

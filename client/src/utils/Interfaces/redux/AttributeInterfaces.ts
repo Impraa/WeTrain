@@ -20,3 +20,9 @@ export interface NotificationInitalState {
   notificationsIsLoading: boolean;
   notificationsError: string | null;
 }
+
+export interface MembershipInitalState {
+  expiryDate: Date | null;
+  isLoading: boolean;
+  error: string | null;
+}

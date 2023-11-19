@@ -12,17 +12,19 @@ const Notifcations = () => {
   return (
     <Suspense fallback={<Spinner />}>
       <div className="notifications">
-        {notifications.map((notification) => {
-          return (
-            <Notification
-              key={notification.id}
-              isHovered={isHovered}
-              onMouseOver={() => setIsHovered(notification.id)}
-              onMouseOut={() => setIsHovered(0)}
-              notification={notification}
-            />
-          );
-        })}
+        {notifications
+          ? notifications.map((notification) => {
+              return (
+                <Notification
+                  key={notification.id}
+                  isHovered={isHovered}
+                  onMouseOver={() => setIsHovered(notification.id)}
+                  onMouseOut={() => setIsHovered(0)}
+                  notification={notification}
+                />
+              );
+            })
+          : "There are no notification"}
       </div>
     </Suspense>
   );

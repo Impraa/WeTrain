@@ -28,7 +28,7 @@ export const getSingleMembershipAsync = async (
     const membership = await getSingleMembership(id);
 
     if (membership.status == 200) {
-      return dispatch(setMembershipSuccess(membership.data));
+      return dispatch(setMembershipSuccess(membership.data.expiryDate));
     }
 
     dispatch(setMembershipError("User has no membership currently"));
@@ -44,9 +44,8 @@ export const createUserMembershipAsync = async (
   dispatch(setMembershipStart());
   try {
     const membership = await createUserMembership(userId);
-    console.log(membership);
     if (membership.status == 200 || membership.status == 201) {
-      return dispatch(setMembershipSuccess(membership.data));
+      return dispatch(setMembershipSuccess(membership.data.expiryDate));
     }
 
     dispatch(

@@ -78,7 +78,7 @@ const NotificationDetails = () => {
                 ""
               )}
             </h2>
-            <p>{notification.text} </p>
+            <p>{notification.text}</p>
           </motion.div>
         </>
       ) : notificationProp ? (

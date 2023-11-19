@@ -2,7 +2,7 @@ import MembershipPlan from "../../components/membership-plan/MembershipPlan";
 import { MembershipPlan as MembershipPlanInter } from "../../utils/Interfaces/components/PropsInterfaces";
 import CustomButton from "../../components/custom-button/CustomButton";
 import "./ChooseAMembership.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPaymentIntentAsync } from "../../redux/user/UserAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -36,12 +36,16 @@ const ChooseAMembership = () => {
   const dispatch = useDispatch();
   const redirect = useNavigate();
 
+  useEffect(() => {
+    if (window.sessionStorage.getItem("client_secret") !== null) {
+      redirect("/payment");
+    }
+  }, [window.sessionStorage.getItem("client_secret")]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await createPaymentIntentAsync(dispatch, planPrice);
-
-    return redirect("/payment");
+    createPaymentIntentAsync(dispatch, planPrice);
   };
 
   return (
