@@ -60,11 +60,7 @@ function Router() {
             path="/payment"
             element={
               <CheckClientSecret>
-                <Payment
-                  client_secret={
-                    window.sessionStorage.getItem("client_secret") as string
-                  }
-                />
+                <Payment />
               </CheckClientSecret>
             }
           />

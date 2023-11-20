@@ -52,7 +52,3 @@ export interface MembershipPlan {
   price: string;
   onClick?: () => void;
 }
-
-export interface Payment {
-  client_secret: string;
-}

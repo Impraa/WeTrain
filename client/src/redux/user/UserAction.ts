@@ -236,6 +236,7 @@ export const createPaymentIntentAsync = async (
     const response = await createPaymentIntent(amount);
     if (response.status === 201) {
       window.sessionStorage.setItem("client_secret", response.data);
+      return true;
     } else {
       return dispatch(setUserFailed("Unable to create payment intent"));
     }
