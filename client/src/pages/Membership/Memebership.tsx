@@ -5,6 +5,7 @@ import { selectCurrentUser } from "../../redux/user/UserSelector";
 import { getSingleMembershipAsync } from "../../redux/membership/MembershipAction";
 import { selectExpiryDate } from "../../redux/membership/MembershipSelector";
 import Spinner from "../../components/spinner/Spinner";
+import MembershipExpired from "../../components/membership-expired/MembershipExpired";
 
 const Memebership = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,8 @@ const Memebership = () => {
     <Suspense fallback={<Spinner />}>
       {isFirstTime ? (
         <FirstTimeMembership />
-      ) : expired ? (
-        "Membership has expired"
+      ) : !expired ? (
+        <MembershipExpired />
       ) : (
         "Membership is active"
       )}

@@ -42,4 +42,27 @@ router.post("/create", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/renew", async (req: Request, res: Response) => {
+  const { userId } = req.body;
+  try {
+    const foundMembership = (await Membership.findOne({
+      where: { userId: userId },
+    })) as Model<MembershipInter>;
+
+    foundMembership.dataValues.expiryDate.setDate(
+      foundMembership.dataValues.expiryDate.getDate() + 30
+    );
+
+    await foundMembership.save();
+
+    return res.status(201).send(foundMembership.dataValues.expiryDate);
+  } catch (error) {
+    return res
+      .status(500)
+      .send(
+        "Renewing user membership went wrong, check if user has made their membership already and please try again"
+      );
+  }
+});
+
 export default router;
