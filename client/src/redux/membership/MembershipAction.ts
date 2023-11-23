@@ -4,6 +4,7 @@ import { MembershipActionType } from "./MembershipTypes";
 import {
   createUserMembership,
   getSingleMembership,
+  renewUserMembership,
 } from "../../services/Memership";
 
 export const setMembershipStart = () => {
@@ -48,6 +49,27 @@ export const createUserMembershipAsync = async (
       return dispatch(setMembershipSuccess(membership.data.expiryDate));
     }
 
+    dispatch(
+      setMembershipError(
+        "Occured an error while trying to set user's membership"
+      )
+    );
+  } catch (error) {
+    dispatch(setMembershipError(error as string));
+  }
+};
+
+export const renewUserMembershipAsync = async (
+  dispatch: Dispatch,
+  userId: string
+) => {
+  dispatch(setMembershipStart());
+  try {
+    const membership = await renewUserMembership(userId);
+    console.log(membership);
+    if (membership.status == 200 || membership.status == 201) {
+      return dispatch(setMembershipSuccess(membership.data));
+    }
     dispatch(
       setMembershipError(
         "Occured an error while trying to set user's membership"

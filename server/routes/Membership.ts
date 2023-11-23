@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import Membership from "../models/membership";
-import { Model } from "sequelize";
+import { Model, Sequelize } from "sequelize";
 import { Membership as MembershipInter } from "../../types/Membership";
 
 const router = express.Router();
@@ -45,17 +45,22 @@ router.post("/create", async (req: Request, res: Response) => {
 router.post("/renew", async (req: Request, res: Response) => {
   const { userId } = req.body;
   try {
-    const foundMembership = (await Membership.findOne({
-      where: { userId: userId },
-    })) as Model<MembershipInter>;
-
-    foundMembership.dataValues.expiryDate.setDate(
-      foundMembership.dataValues.expiryDate.getDate() + 30
+    let updatedMembership = await Membership.update(
+      {
+        expiryDate: Sequelize.literal("DATE_ADD(expiryDate, INTERVAL 30 DAY)"),
+      },
+      { where: { userId: userId } }
     );
 
-    await foundMembership.save();
+    if (updatedMembership[0] !== 0) {
+      const foundMembership = (await Membership.findOne({
+        where: { userId: userId },
+      })) as Model<MembershipInter>;
 
-    return res.status(201).send(foundMembership.dataValues.expiryDate);
+      return res.status(201).send(foundMembership.dataValues.expiryDate);
+    } else {
+      return res.status(404).send("Membership not found");
+    }
   } catch (error) {
     return res
       .status(500)

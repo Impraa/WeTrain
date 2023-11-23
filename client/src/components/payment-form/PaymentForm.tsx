@@ -10,8 +10,14 @@ import { Message } from "../message/Message";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/UserSelector";
-import { createUserMembershipAsync } from "../../redux/membership/MembershipAction";
-import { selectMembershipError } from "../../redux/membership/MembershipSelector";
+import {
+  createUserMembershipAsync,
+  renewUserMembershipAsync,
+} from "../../redux/membership/MembershipAction";
+import {
+  selectExpiryDate,
+  selectMembershipError,
+} from "../../redux/membership/MembershipSelector";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -21,6 +27,7 @@ const PaymentForm = () => {
 
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser)!;
+  const expiryDate = useSelector(selectExpiryDate);
   const membershipError = useSelector(selectMembershipError);
 
   const [paymentError, setPaymentError] = useState<string>("");
@@ -56,7 +63,12 @@ const PaymentForm = () => {
     if (error) {
       setPaymentError(error as unknown as string);
     } else {
-      createUserMembershipAsync(dispatch, user.id);
+      console.log(expiryDate instanceof Date);
+      if (expiryDate instanceof Date) {
+        renewUserMembershipAsync(dispatch, user.id);
+      } else {
+        createUserMembershipAsync(dispatch, user.id);
+      }
 
       if (membershipError) {
         setPaymentError(membershipError);
