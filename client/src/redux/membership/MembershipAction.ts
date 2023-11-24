@@ -27,7 +27,6 @@ export const getSingleMembershipAsync = async (
 
   try {
     const membership = await getSingleMembership(id);
-
     if (membership.status == 200) {
       return dispatch(setMembershipSuccess(membership.data.expiryDate));
     }

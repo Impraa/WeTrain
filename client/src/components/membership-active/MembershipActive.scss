@@ -1,6 +1,5 @@
 @import "../../utils/variables";
-
-.membership-expired {
+.membership-active {
   display: flex;
   height: 60vh;
   flex-direction: column;
@@ -14,11 +13,11 @@
     svg {
       width: 8em;
       height: 8em;
-      color: $errorColor;
+      color: $successColor;
     }
     h2 {
       text-align: center;
-      font-size: 1.5em;
+      font-size: 1.75em;
     }
   }
   h3 {
@@ -26,24 +25,5 @@
   }
   button {
     font-size: 1.15em;
-  }
-}
-
-@media (min-width: 768px) {
-  .membership-expired {
-    .title-icon {
-      svg {
-        width: 7em;
-        height: 7em;
-        color: $errorColor;
-      }
-      h2 {
-        padding: 0 0.5em;
-        font-size: 1.75em;
-      }
-    }
-    button {
-      font-size: 1.3em;
-    }
   }
 }
