@@ -1,13 +1,16 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SvgXml } from "react-native-svg";
+import WeTrainLogo from "./assets/WeTrainLogo";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <WeTrainLogo />
       <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <StatusBar style="dark" />
+    </SafeAreaView>
   );
 }
 
