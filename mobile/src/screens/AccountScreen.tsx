@@ -2,12 +2,18 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import WeTrainLogo from "../../assets/WeTrainLogo";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { TextInput } from "react-native-paper";
 
 export const AccountScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <WeTrainLogo />
-      <Text>Open up App.js to start working on your app!!</Text>
+      <TextInput label="Username" />
+      <TextInput
+        label="Password"
+        secureTextEntry
+        right={<TextInput.Icon icon="eye" />}
+      />
     </SafeAreaView>
   );
 };
