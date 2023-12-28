@@ -4,25 +4,28 @@
     "slug": "WeTrain",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/WeTrainLogoSite.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/WeTrainLogoSite.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/WeTrainLogoSite.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.impra.WeTrain"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/WeTrainLogoSite.png"
     }
   }
 }

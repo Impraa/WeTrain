@@ -3,7 +3,8 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 import React from "react";
-import { AccountScreen } from "../screens/AccountScreen";
+import { Login } from "../screens/Login";
+import { Register } from "../screens/Register";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,8 @@ export const AccountNavigator = () => {
         ...TransitionPresets.ModalSlideFromBottomIOS,
       }}
     >
-      <Stack.Screen name="Main" component={AccountScreen} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 };
